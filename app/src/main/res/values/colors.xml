@@ -2,4 +2,10 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="EditTextFonte">#000000</color>
+    <color name="EditTextFundo">#C0C0C0</color>
+    <color name="BotaoFonte">#FFFFFF</color>
+    <color name="BotaoFundo">#363636</color>
+    <color name="ActivityFundo">#A9A9A9</color>
+    <color name="Transparente">#00000000</color>
 </resources>
