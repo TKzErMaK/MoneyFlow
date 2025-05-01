@@ -5,4 +5,14 @@
     <string name="txt_title">Título</string>
     <string name="btn_menu_access">Acessar menu</string>
     <string name="btn_profile_access">Acessar perfil</string>
+    <string name="txt_search_hint">Digite o título da meta</string>
+    <string name="txt_goal_value_example_1">R$ 5.000,00</string>
+    <string name="txt_goal_description_example_1">Viagem de Final de ano</string>
+    <string name="txt_goal_date_example_1">31/12/2025</string>
+    <string name="txt_goal_value_example_2">R$ 2.500,00</string>
+    <string name="txt_goal_description_example_2">Teto de gastos mensal</string>
+    <string name="txt_goal_date_example_2">31/05/2025</string>
+    <string name="btn_add_goal_hint">Adicionar Meta</string>
+    <string name="txt_goal_title">Metas</string>
+    <string name="img_search_icon_description">Ícone de busca</string>
 </resources>
