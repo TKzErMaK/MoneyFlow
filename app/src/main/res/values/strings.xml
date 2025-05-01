@@ -15,4 +15,18 @@
     <string name="btn_add_goal_hint">Adicionar Meta</string>
     <string name="txt_goal_title">Metas</string>
     <string name="img_search_icon_description">Ícone de busca</string>
+    <string name="txt_description_hint">Descrição</string>
+    <string name="txt_value_hint">Valor</string>
+    <string name="txt_start_date_hint">Data de início</string>
+    <string name="txt_deadline_hint">Prazo</string>
+    <string name="rb_income">RECEITA</string>
+    <string name="rb_expense">DESPESA</string>
+    <string name="btn_save">GRAVAR</string>
+    <string name="txt_progress_value_example">R$ 2.481,00</string>
+    <string name="txt_value">Valor:</string>
+    <string name="txt_deadline">Prazo:</string>
+    <string name="txt_deadline_example">31/12/2025</string>
+    <string name="txt_days_remaining">Dias Restantes:</string>
+    <string name="txt_days_remaining_example">152</string>
+    <string name="btn_edit">EDITAR</string>
 </resources>
