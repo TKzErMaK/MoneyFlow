@@ -8,50 +8,59 @@
     tools:context=".MainActivity">
 
     <ImageView
-        android:id="@+id/BackTitulo"
+        android:id="@+id/img_title"
         android:layout_width="0dp"
         android:layout_height="50dp"
+        android:contentDescription="@string/img_title_description"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@color/material_dynamic_neutral60" />
+        app:srcCompat="@color/material_dynamic_neutral70" />
 
     <TextView
-        android:id="@+id/Titulo"
+        android:id="@+id/txt_title"
         android:layout_width="0dp"
         android:layout_height="50dp"
-        android:text="Titulo"
-        android:textColor="@color/black"
+        android:gravity="center"
+        android:text="@string/txt_title"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        app:layout_constraintEnd_toStartOf="@+id/Perfil"
-        app:layout_constraintStart_toEndOf="@+id/Menu"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toStartOf="@+id/btn_profile"
+        app:layout_constraintStart_toEndOf="@+id/btn_menu"
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/Menu"
+        android:id="@+id/btn_menu"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:clickable="true"
-        app:backgroundTint="@color/material_dynamic_neutral60"
+        android:contentDescription="@string/btn_menu_access"
+        android:focusable="true"
+        app:backgroundTint="@color/material_dynamic_neutral70"
         app:elevation="0dp"
         app:fabCustomSize="50dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:maxImageSize="40dp"
-        app:srcCompat="@drawable/baseline_menu_60" />
+        app:srcCompat="@drawable/baseline_menu_60"
+        app:tint="@color/black" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/Perfil"
+        android:id="@+id/btn_profile"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:clickable="true"
-        app:backgroundTint="@color/material_dynamic_neutral60"
+        android:contentDescription="@string/btn_profile_access"
+        android:focusable="true"
+        app:backgroundTint="@color/material_dynamic_neutral70"
         app:elevation="0dp"
         app:fabCustomSize="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:maxImageSize="40dp"
-        app:srcCompat="@drawable/baseline_account_circle_24" />
+        app:srcCompat="@drawable/baseline_account_circle_24"
+        app:tint="@color/black" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

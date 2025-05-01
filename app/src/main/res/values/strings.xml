@@ -1,3 +1,8 @@
 <resources>
-    <string name="app_name">Trabalho</string>
+    <string name="app_name">MoneyFlow</string>
+    <string name="img_title_description">Barra de título</string>
+    <string name="txt_title_money_flow">Money Flow</string>
+    <string name="txt_title">Título</string>
+    <string name="btn_menu_access">Acessar menu</string>
+    <string name="btn_profile_access">Acessar perfil</string>
 </resources>
