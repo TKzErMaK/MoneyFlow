@@ -38,7 +38,7 @@
             android:layout_marginStart="8dp"
             android:layout_weight="1"
             android:background="@android:color/transparent"
-            android:hint="@string/txt_search_hint_metas"
+            android:hint="@string/txt_search_hint_investimentos"
             android:importantForAutofill="no"
             android:inputType="text"
             android:padding="12dp"
@@ -76,7 +76,7 @@
                     android:padding="12dp">
 
                     <TextView
-                        android:text="@string/txt_goal_value_example_1"
+                        android:text="R$ 1.000,00"
                         android:textStyle="bold"
                         android:textColor="#000000"
                         android:textSize="16sp"
@@ -84,16 +84,16 @@
                         android:layout_width="wrap_content" />
 
                     <TextView
-                        android:text="@string/txt_goal_description_example_1"
-                        android:textColor="#444444"
+                        android:text="Faculdade"
+                        android:textColor="#000000"
                         android:textSize="14sp"
                         android:layout_height="wrap_content"
                         android:layout_width="wrap_content" />
 
                     <TextView
                         android:layout_gravity="end"
-                        android:text="@string/txt_goal_date_example_1"
-                        android:textColor="#1A237E"
+                        android:text="01/01/2025"
+                        android:textColor="#000000"
                         android:textSize="14sp"
                         android:layout_height="wrap_content"
                         android:layout_width="wrap_content" />
@@ -106,7 +106,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
-                app:cardBackgroundColor="#FFE3E3"
+                app:cardBackgroundColor="#D0E7FF"
                 app:cardElevation="2dp">
 
                 <LinearLayout
@@ -116,7 +116,7 @@
                     android:padding="12dp">
 
                     <TextView
-                        android:text="@string/txt_goal_value_example_2"
+                        android:text="R$ 1.000,00"
                         android:textStyle="bold"
                         android:textColor="#000000"
                         android:textSize="16sp"
@@ -124,16 +124,16 @@
                         android:layout_width="wrap_content" />
 
                     <TextView
-                        android:text="@string/txt_goal_description_example_2"
-                        android:textColor="#444444"
+                        android:text="Faculdade"
+                        android:textColor="#000000"
                         android:textSize="14sp"
                         android:layout_height="wrap_content"
                         android:layout_width="wrap_content" />
 
                     <TextView
                         android:layout_gravity="end"
-                        android:text="@string/txt_goal_date_example_2"
-                        android:textColor="#880E4F"
+                        android:text="01/02/2025"
+                        android:textColor="#000000"
                         android:textSize="14sp"
                         android:layout_height="wrap_content"
                         android:layout_width="wrap_content" />
