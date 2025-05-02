@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/goal_list">
+    android:id="@+id/investment_list">
 
     <include
         layout="@layout/top_bar"
@@ -38,7 +38,7 @@
             android:layout_marginStart="8dp"
             android:layout_weight="1"
             android:background="@android:color/transparent"
-            android:hint="@string/txt_search_hint_investimentos"
+            android:hint="Digite a descrição do investimento"
             android:importantForAutofill="no"
             android:inputType="text"
             android:padding="12dp"
@@ -57,7 +57,7 @@
         app:layout_constraintEnd_toEndOf="parent">
 
         <LinearLayout
-            android:id="@+id/goals_container"
+            android:id="@+id/investment_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -151,7 +151,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:contentDescription="@string/btn_add_goal_hint"
+        android:contentDescription="Adicionar Investimento"
         android:src="@drawable/ic_add"
         app:backgroundTint="@color/material_dynamic_neutral60"
         app:tint="@color/black"

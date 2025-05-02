@@ -38,7 +38,7 @@
             android:layout_marginStart="8dp"
             android:layout_weight="1"
             android:background="@android:color/transparent"
-            android:hint="@string/txt_search_hint_metas"
+            android:hint="@string/txt_search_hint_goal"
             android:importantForAutofill="no"
             android:inputType="text"
             android:padding="12dp"
