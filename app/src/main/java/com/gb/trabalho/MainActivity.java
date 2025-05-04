@@ -1,5 +1,6 @@
 package com.gb.trabalho;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
@@ -14,13 +15,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
-        setContentView(R.layout.top_bar);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
 
+        // Você pode remover o setContentView atual se for apenas redirecionar
+        Intent intent = new Intent(MainActivity.this, ListaMetasActivity.class);
+        startActivity(intent);
+        finish(); // Fecha a MainActivity se você não precisa voltar a ela
     }
 }
