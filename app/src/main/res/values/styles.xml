@@ -1,90 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<style name="ActivityPadrao">
-    <item name="android:background">@color/ActivityFundo</item>
-    <item name="android:layout_height">match_parent</item>
-    <item name="android:layout_width">match_parent</item>
-</style>
 
-<style name="LabelPadrao">
-    <item name="android:layout_height">wrap_content</item>
-    <item name="android:layout_width">wrap_content</item>
-    <item name="android:padding">10dp</item>
-    <item name="android:textSize">18sp</item>
-    <item name="android:textColor">@color/EditTextFonte</item>
-    <item name="android:backgroundTint">@color/Transparente</item>
-    <item name="android:fontFamily">sans-serif-medium</item>
-    <item name="android:textStyle">bold</item>
-    <item name="android:textAlignment">center</item>
-</style>
+    <style name="ActivityPadrao">
+        <item name="android:background">@color/ActivityFundo</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_width">match_parent</item>
+    </style>
 
-<style name="LabelMensagem">
-    <item name="android:layout_height">wrap_content</item>
-    <item name="android:layout_width">wrap_content</item>
-    <item name="android:paddingLeft">10dp</item>
-    <item name="android:paddingTop">10dp</item>
-    <item name="android:paddingRight">10dp</item>
-    <item name="android:paddingBottom">10dp</item>
-    <item name="android:textSize">16sp</item>
-    <item name="android:textColor">@color/EditTextFonte</item>
-    <item name="android:backgroundTint">@color/Transparente</item>
-    <item name="android:fontFamily">sans-serif-medium</item>
-    <item name="android:textStyle">normal</item>
-    <item name="android:textAlignment">textStart</item>
-</style>
+    <style name="LabelPadrao">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/EditTextFonte</item>
+        <item name="android:backgroundTint">@color/Transparente</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAlignment">center</item>
+    </style>
 
-<!-- Campo que envolve o EditText "Caixa com o contorno" -->
-<style name="InputLayoutPadrao" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-    <item name="boxStrokeColor">@color/material_on_surface_stroke</item>
-    <item name="boxBackgroundColor">@color/EditTextFundo</item>
-    <item name="android:layout_width">350dp</item>
-    <item name="android:layout_height">wrap_content</item>
-    <item name="hintEnabled">true</item>
-    <item name="hintTextColor">@color/EditTextFonte</item>
-    <item name="android:textColorHint">@color/EditTextFonte</item>
-</style>
+    <style name="LabelMensagem">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:paddingLeft">10dp</item>
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingRight">10dp</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/EditTextFonte</item>
+        <item name="android:backgroundTint">@color/Transparente</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textAlignment">textStart</item>
+    </style>
 
-<!-- Campo de texto propriamente dito que recebe a informação -->
-<style name="EditTextPadrao">
-    <item name="android:layout_width">match_parent</item>
-    <item name="android:layout_height">wrap_content</item>
-    <item name="android:gravity">bottom</item>
-    <item name="android:paddingStart">10dp</item>
-    <item name="android:paddingEnd">10dp</item>
-    <item name="android:paddingTop">10dp</item>
-    <item name="android:paddingBottom">10dp</item>
-    <item name="android:textSize">14sp</item>
-    <item name="android:textColor">@color/EditTextFonte</item>
-    <item name="android:fontFamily">sans-serif-medium</item>
-</style>
+    <!-- Campo que envolve o EditText "Caixa com o contorno" -->
+    <style name="InputLayoutPadrao" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxStrokeColor">@color/material_on_surface_stroke</item>
+        <item name="boxBackgroundColor">@color/EditTextFundo</item>
+        <item name="android:layout_width">350dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="hintEnabled">true</item>
+        <item name="hintTextColor">@color/EditTextFonte</item>
+        <item name="android:textColorHint">@color/EditTextFonte</item>
+    </style>
 
-<style name="BotaoPadrao" parent="Widget.MaterialComponents.Button">
-    <item name="android:textSize">12sp</item>
-    <item name="android:textColor">@color/BotaoFonte</item>
-    <item name="android:fontFamily">sans-serif-medium</item>
-    <item name="android:textStyle">bold</item>
-    <item name="android:layout_width">150dp</item>
-    <item name="android:layout_height">50dp</item>
-    <item name="android:backgroundTint">@color/BotaoFundo</item>
-</style>
+    <!-- Campo de texto propriamente dito que recebe a informação -->
+    <style name="EditTextPadrao">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">bottom</item>
+        <item name="android:paddingStart">10dp</item>
+        <item name="android:paddingEnd">10dp</item>
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/EditTextFonte</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+    </style>
 
-<style name="DefaultLabel">
-    <item name="android:layout_height">wrap_content</item>
-    <item name="android:layout_width">wrap_content</item>
-    <item name="android:padding">8dp</item>
-    <item name="android:textSize">16sp</item>
-    <item name="android:textColor">@color/black</item>
-    <item name="android:fontFamily">sans-serif-medium</item>
-</style>
+    <style name="BotaoPadrao" parent="Widget.MaterialComponents.Button">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/BotaoFonte</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_width">150dp</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:backgroundTint">@color/BotaoFundo</item>
+    </style>
 
-<style name="DefaultButton" parent="Widget.MaterialComponents.Button">
-    <item name="android:textSize">16sp</item>
-    <item name="android:textColor">@color/black</item>
-    <item name="android:fontFamily">sans-serif-medium</item>
-    <item name="android:textStyle">bold</item>
-    <item name="android:layout_width">match_parent</item>
-    <item name="android:layout_height">wrap_content</item>
-    <item name="android:backgroundTint">@color/material_dynamic_neutral70</item>
-</style>
+    <style name="DefaultLabel">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:padding">8dp</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+    </style>
+
+    <style name="DefaultButton" parent="Widget.MaterialComponents.Button">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:backgroundTint">@color/material_dynamic_neutral70</item>
+    </style>
+
+    <style name="BotaoMes">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:layout_marginEnd">8dp</item>
+        <item name="android:textColor">#000000</item>
+        <item name="android:backgroundTint">#E0E0E0</item>
+        <item name="android:minWidth">64dp</item>
+        <item name="android:paddingHorizontal">12dp</item>
+        <item name="android:textSize">14sp</item>
+    </style>
 
 </resources>

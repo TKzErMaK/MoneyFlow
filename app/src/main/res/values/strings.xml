@@ -6,6 +6,7 @@
     <string name="btn_menu_access">Acessar menu</string>
     <string name="btn_profile_access">Acessar perfil</string>
     <string name="txt_search_hint_goal">Digite o título da meta</string>
+    <string name="txt_search_hint_statement">Buscar no extrato</string>
     <string name="txt_goal_value_example_1">R$ 5.000,00</string>
     <string name="txt_goal_description_example_1">Viagem de Final de ano</string>
     <string name="txt_goal_date_example_1">31/12/2025</string>
@@ -18,6 +19,7 @@
     <string name="txt_description_hint">Descrição</string>
     <string name="txt_value_hint">Valor</string>
     <string name="txt_start_date_hint">Data de início</string>
+    <string name="txt_date">Data</string>
     <string name="txt_deadline_hint">Prazo</string>
     <string name="rb_income">RECEITA</string>
     <string name="rb_expense">DESPESA</string>

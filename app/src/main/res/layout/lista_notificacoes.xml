@@ -1,33 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/lista_investimentos"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:id="@+id/lista_notificacoes">
 
     <include
-        android:id="@+id/top_bar"
-        layout="@layout/top_bar" />
+        layout="@layout/top_bar"
+        android:id="@+id/top_bar" />
 
     <LinearLayout
         android:id="@+id/search_input_layout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:background="@drawable/search_background"
-        android:gravity="center_vertical"
         android:orientation="horizontal"
+        android:background="@drawable/search_background"
         android:padding="4dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:gravity="center_vertical"
+        app:layout_constraintTop_toBottomOf="@id/top_bar"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/top_bar">
+        app:layout_constraintEnd_toEndOf="parent">
 
         <ImageView
             android:id="@+id/icon_search"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginStart="8dp"
-            android:contentDescription="@string/img_search_icon_description"
             android:src="@drawable/ic_search"
+            android:contentDescription="@string/img_search_icon_description"
             app:tint="@color/EditTextFonte" />
 
         <EditText
@@ -37,12 +38,13 @@
             android:layout_marginStart="8dp"
             android:layout_weight="1"
             android:background="@android:color/transparent"
-            android:hint="Digite a descrição do investimento"
+            android:hint="Digite a descrição da notificação"
             android:importantForAutofill="no"
             android:inputType="text"
             android:padding="12dp"
             android:textColor="@color/EditTextFonte"
             android:textColorHint="@color/material_dynamic_neutral40" />
+
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -63,7 +65,8 @@
         android:contentDescription="Adicionar Investimento"
         android:src="@drawable/ic_add"
         app:backgroundTint="@color/material_dynamic_neutral60"
+        app:tint="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:tint="@color/black" />
+        app:layout_constraintEnd_toEndOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

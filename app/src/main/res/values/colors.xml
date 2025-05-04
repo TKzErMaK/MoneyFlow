@@ -8,4 +8,26 @@
     <color name="BotaoFundo">#363636</color>
     <color name="ActivityFundo">#A9A9A9</color>
     <color name="Transparente">#00000000</color>
+    <color name="receita">#A0C9FF</color>
+    <color name="despesa">#FFCDD2</color>
+    <color name="color_1">#F44336</color>
+    <color name="color_2">#2196F3</color>
+    <color name="color_3">#4CAF50</color>
+    <color name="color_4">#FFEB3B</color>
+    <color name="color_5">#9C27B0</color>
+    <color name="color_6">#FF9800</color>
+    <color name="color_7">#03A9F4</color>
+    <color name="color_8">#CDDC39</color>
+    <color name="color_9">#795548</color>
+    <color name="color_10">#E91E63</color>
+    <color name="color_11">#00BCD4</color>
+    <color name="color_12">#FFC107</color>
+    <color name="color_13">#673AB7</color>
+    <color name="color_14">#8BC34A</color>
+    <color name="color_15">#FF5722</color>
+    <color name="color_16">#607D8B</color>
+    <color name="color_17">#3F51B5</color>
+    <color name="color_18">#009688</color>
+    <color name="color_19">#9E9E9E</color>
+    <color name="color_20">#000000</color>
 </resources>

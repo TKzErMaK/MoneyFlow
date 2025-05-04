@@ -1,61 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/extrato"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/lista_metas">
+    android:layout_height="match_parent">
 
     <include
         layout="@layout/top_bar"
         android:id="@+id/top_bar" />
 
-    <LinearLayout
-        android:id="@+id/search_input_layout"
+    <HorizontalScrollView
+        android:id="@+id/month_scroll"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:orientation="horizontal"
-        android:background="@drawable/search_background"
-        android:padding="4dp"
-        android:gravity="center_vertical"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:fillViewport="true"
+        android:scrollbars="none"
         app:layout_constraintTop_toBottomOf="@id/top_bar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <ImageView
-            android:id="@+id/icon_search"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginStart="8dp"
-            android:src="@drawable/ic_search"
-            android:contentDescription="@string/img_search_icon_description"
-            app:tint="@color/EditTextFonte" />
-
-        <EditText
-            android:id="@+id/edt_search_input"
-            android:layout_width="0dp"
+        <LinearLayout
+            android:id="@+id/month_container"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:hint="@string/txt_search_hint_goal"
-            android:importantForAutofill="no"
-            android:inputType="text"
-            android:padding="12dp"
-            android:textColor="@color/EditTextFonte"
-            android:textColorHint="@color/material_dynamic_neutral40" />
+            android:orientation="horizontal">
 
-    </LinearLayout>
+            <Button android:text="JAN" style="@style/BotaoMes" />
+            <Button android:text="FEV" style="@style/BotaoMes" />
+            <Button android:text="MAR" style="@style/BotaoMes" />
+            <Button android:text="ABR" style="@style/BotaoMes" />
+            <Button android:text="MAI" style="@style/BotaoMes" />
+            <Button android:text="JUN" style="@style/BotaoMes" />
+            <Button android:text="JUL" style="@style/BotaoMes" />
+            <Button android:text="AGO" style="@style/BotaoMes" />
+            <Button android:text="SET" style="@style/BotaoMes" />
+            <Button android:text="OUT" style="@style/BotaoMes" />
+            <Button android:text="NOV" style="@style/BotaoMes" />
+            <Button android:text="DEZ" style="@style/BotaoMes" />
+
+        </LinearLayout>
+    </HorizontalScrollView>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_extrato"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="16dp"
+        app:layout_constraintTop_toBottomOf="@id/month_scroll"
         app:layout_constraintBottom_toTopOf="@+id/btn_add"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/search_input_layout" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btn_add"
