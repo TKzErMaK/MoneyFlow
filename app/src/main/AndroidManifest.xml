@@ -13,10 +13,6 @@
         android:theme="@style/Theme.Trabalho"
         tools:targetApi="31">
 
-        <activity android:name=".CadastroMetasActivity" />
-        <activity android:name=".ListaMetasActivity" />
-        <activity android:name=".VisualizaMetasActivity" />
-
         <activity
             android:name=".VisualizarMetasActivity"
             android:exported="false" />
