@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/goal_viewer"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/visualizar_metas">
+    android:layout_height="match_parent">
 
     <include
-        android:id="@+id/top_bar_visualizar_metas"
-        layout="@layout/top_bar"/>
+        android:id="@+id/top_bar_metas"
+        layout="@layout/top_bar" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -17,7 +16,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/top_bar_visualizar_metas">
+        app:layout_constraintTop_toBottomOf="@id/top_bar_metas">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -33,7 +32,7 @@
                 android:textAlignment="center" />
 
             <com.google.android.material.progressindicator.CircularProgressIndicator
-                android:id="@+id/gr_grafico"
+                android:id="@+id/progress_goal"
                 style="@style/Widget.MaterialComponents.CircularProgressIndicator"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
@@ -48,7 +47,7 @@
                 app:trackThickness="6dp" />
 
             <TextView
-                android:id="@+id/txt_valoratual"
+                android:id="@+id/txt_progress_value"
                 android:layout_marginTop="8dp"
                 android:text="@string/txt_progress_value_example"
                 android:textSize="16sp"
@@ -66,7 +65,7 @@
                     android:text="@string/txt_value" />
 
                 <TextView
-                    android:id="@+id/txt_valormeta"
+                    android:id="@+id/txt_goal_value"
                     style="@style/DefaultLabel"
                     android:text="@string/txt_goal_value_example_1" />
 
@@ -76,7 +75,7 @@
                     android:text="@string/txt_deadline" />
 
                 <TextView
-                    android:id="@+id/txt_prazo"
+                    android:id="@+id/txt_goal_deadline"
                     style="@style/DefaultLabel"
                     android:text="@string/txt_deadline_example" />
 
@@ -86,14 +85,14 @@
                     android:text="@string/txt_days_remaining" />
 
                 <TextView
-                    android:id="@+id/txt_diasrestantes"
+                    android:id="@+id/txt_goal_days_remaining"
                     style="@style/DefaultLabel"
                     android:text="@string/txt_days_remaining_example" />
 
             </LinearLayout>
 
             <Button
-                android:id="@+id/btn_editar"
+                android:id="@+id/btn_edit_goal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"

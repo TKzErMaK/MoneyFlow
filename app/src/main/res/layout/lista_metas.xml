@@ -3,11 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/lista_metas">
+    android:id="@+id/goal_list">
 
     <include
         layout="@layout/top_bar"
-        android:id="@+id/top_bar" />
+        android:id="@+id/top_bar_metas" />
 
     <LinearLayout
         android:id="@+id/search_input_layout"
@@ -18,7 +18,7 @@
         android:background="@drawable/search_background"
         android:padding="4dp"
         android:gravity="center_vertical"
-        app:layout_constraintTop_toBottomOf="@id/top_bar"
+        app:layout_constraintTop_toBottomOf="@id/top_bar_metas"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
@@ -47,15 +47,25 @@
 
     </LinearLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_extrato"
-        android:layout_width="0dp"
+    <ScrollView
+        android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_margin="16dp"
+        android:contentDescription="@string/txt_goal_created"
+        app:layout_constraintTop_toBottomOf="@id/search_input_layout"
         app:layout_constraintBottom_toTopOf="@+id/btn_add"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/search_input_layout" />
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:id="@+id/goals_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        </LinearLayout>
+
+    </ScrollView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btn_add"

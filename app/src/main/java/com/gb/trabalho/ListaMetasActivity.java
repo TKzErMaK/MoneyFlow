@@ -1,65 +1,111 @@
 package com.gb.trabalho;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
+import android.util.Log;
+import android.view.Gravity;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.activity.EdgeToEdge;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class ListaMetasActivity extends AppCompatActivity {
-    FloatingActionButton btnadicionar;
-    Intent intent;
+
+    private ActivityResultLauncher<Intent> cadastroMetaLauncher;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.lista_metas);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.top_bar), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
+
+        ConstraintLayout topBar = findViewById(R.id.top_bar_metas);
+        TextView titulo = topBar.findViewById(R.id.txt_title);
+        titulo.setText(R.string.txt_dynamic_title_goal);
+
+        cadastroMetaLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    if (result.getResultCode() == RESULT_OK && result.getData() != null) {
+                        Intent data = result.getData();
+                        String descricao = data.getStringExtra("descricao");
+                        String valor = data.getStringExtra("valor");
+                        String dataMeta = data.getStringExtra("data");
+                        int prazo = data.getIntExtra("prazo", 0);
+                        boolean isReceita = data.getBooleanExtra("isReceita", true);
+
+                        adicionarCard(descricao, valor, dataMeta, prazo, isReceita);
+                    }
+                }
+        );
+
+        FloatingActionButton btnAdd = findViewById(R.id.btn_add);
+        btnAdd.setOnClickListener(v -> {
+            Intent intent = new Intent(ListaMetasActivity.this, CadastroMetasActivity.class);
+            cadastroMetaLauncher.launch(intent);
         });
-        ConstraintLayout topBar = findViewById(R.id.top_bar);
-        TextView txtTitle = topBar.findViewById(R.id.txt_title);
-        txtTitle.setText("Metas");
+    }
 
-        RecyclerView recyclerView = findViewById(R.id.recycler_extrato);
-        List<ItemLista> itens = new ArrayList<>();
-        itens.add(new ItemLista("R$ 5.000,00", "Viagem de final de ano", "31/12/2025", 1)); //receita
-        itens.add(new ItemLista("R$ 2500,00", "Teto de gastos mensal", "31/05/2025", 0)); // despesa
+    private void adicionarCard(String descricao, String valor, String data, int prazo, boolean isReceita) {
+        LinearLayout container = findViewById(R.id.goals_container);
 
-        ItemListaAdapter adapter = new ItemListaAdapter(this, itens, item -> {
-            Intent intent = new Intent(this, CadastroMetasActivity.class);
-            intent.putExtra("valor", item.getValor());
-            intent.putExtra("descricao", item.getDescricao());
-            intent.putExtra("data", item.getData());
-            intent.putExtra("tipo", item.getTipo());
+        CardView card = new CardView(this);
+        card.setCardElevation(8);
+        card.setUseCompatPadding(true);
+
+        LinearLayout layout = new LinearLayout(this);
+        layout.setOrientation(LinearLayout.VERTICAL);
+        layout.setPadding(24, 24, 24, 24);
+
+        TextView txtValor = new TextView(this);
+        txtValor.setText(valor);
+        txtValor.setTextSize(16);
+        txtValor.setTextColor(Color.parseColor("#000000"));
+        txtValor.setTypeface(Typeface.DEFAULT_BOLD);
+
+        TextView txtDescricao = new TextView(this);
+        txtDescricao.setText(descricao);
+        txtDescricao.setTextSize(14);
+
+        TextView txtData = new TextView(this);
+        txtData.setText(data);
+        txtData.setGravity(Gravity.END);
+
+        int corTextoData = isReceita ? Color.parseColor("#1A237E") : Color.parseColor("#880E4F");
+        txtData.setTextColor(corTextoData);
+
+        layout.addView(txtValor);
+        layout.addView(txtDescricao);
+        layout.addView(txtData);
+
+        card.addView(layout);
+
+        int cor = isReceita ? Color.parseColor("#D0E7FF") : Color.parseColor("#FFE3E3");
+        card.setCardBackgroundColor(cor);
+
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+        );
+        params.setMargins(0, 0, 0, 24);
+
+        card.setOnClickListener(v -> {
+            Intent intent = new Intent(this, VisualizaMetasActivity.class);
+            intent.putExtra("descricao", descricao);
+            intent.putExtra("valor", valor);
+            intent.putExtra("data", data);
+            intent.putExtra("prazo", prazo);
+            Log.d("ListaMetas", "Abrindo meta: " + descricao + ", " + valor + ", " + prazo + ", " + data);
             startActivity(intent);
         });
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(adapter);
 
-        btnadicionar = findViewById(R.id.btn_add);
-        btnadicionar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                intent = new Intent(ListaMetasActivity.this, CadastroMetasActivity.class);
-                startActivity(intent);
-            }
-        });
+        container.addView(card, params);
     }
 }
