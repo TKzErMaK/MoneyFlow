@@ -31,4 +31,14 @@
     <string name="txt_days_remaining">Dias Restantes:</string>
     <string name="txt_days_remaining_example">152</string>
     <string name="btn_edit">EDITAR</string>
+    <string name="txt_dynamic_title_goal">METAS</string>
+    <string name="formatted_value">%1$s</string>
+    <string name="days_remaining_format">%1$d dias restantes</string>
+    <string name="expired_deadline">Prazo expirado</string>
+    <string name="progress_format">Progresso: %d%%</string>
+    <string name="valor_indefinido">Valor indefinido</string>
+    <string name="data_indefinida">Data não informada</string>
+    <string name="descricao_indefinida">Descrição não informada</string>
+    <string name="txt_goal_created">Metas criadas</string>
+
 </resources>
