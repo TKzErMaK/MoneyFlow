@@ -19,22 +19,15 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListaInvestimentosActivity extends AppCompatActivity {
+public class ListaInvestimentosActivity extends BaseActivity {
     FloatingActionButton btnadicionar;
     Intent intent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.lista_investimentos);
-
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.top_bar), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
-        ConstraintLayout topBar = findViewById(R.id.top_bar);
-        TextView txtTitle = topBar.findViewById(R.id.txt_title);
+        setActivityContent(R.layout.lista_investimentos);
+        TextView txtTitle = findViewById(R.id.txt_titulo);
         txtTitle.setText("Investimentos");
 
         RecyclerView recyclerView = findViewById(R.id.recycler_extrato);

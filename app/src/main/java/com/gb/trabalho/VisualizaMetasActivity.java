@@ -7,6 +7,7 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.activity.EdgeToEdge;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,7 +21,7 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Objects;
 
-public class VisualizaMetasActivity extends AppCompatActivity {
+public class VisualizaMetasActivity extends BaseActivity {
 
     private static final String TAG = "VisualizaMetasActivity";
 
@@ -33,10 +34,9 @@ public class VisualizaMetasActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.visualiza_metas);
-
-        ConstraintLayout topBar = findViewById(R.id.top_bar_metas);
-        TextView titulo = topBar.findViewById(R.id.txt_title);
+        EdgeToEdge.enable(this);
+        setActivityContent(R.layout.visualiza_metas);
+        TextView titulo = findViewById(R.id.txt_titulo);
         titulo.setText(R.string.txt_dynamic_title_goal);
 
         TextView txtGoalTitle = findViewById(R.id.txt_goal_title);

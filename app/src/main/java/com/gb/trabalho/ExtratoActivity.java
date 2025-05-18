@@ -19,7 +19,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ExtratoActivity extends AppCompatActivity {
+public class ExtratoActivity extends BaseActivity {
     FloatingActionButton btnadicionar;
     Intent intent;
 
@@ -27,14 +27,8 @@ public class ExtratoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.extrato);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.top_bar), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
-        ConstraintLayout topBar = findViewById(R.id.top_bar);
-        TextView txtTitle = topBar.findViewById(R.id.txt_title);
+        setActivityContent(R.layout.extrato);
+        TextView txtTitle = findViewById(R.id.txt_titulo);
         txtTitle.setText("Extrato");
 
         RecyclerView recyclerView = findViewById(R.id.recycler_extrato);

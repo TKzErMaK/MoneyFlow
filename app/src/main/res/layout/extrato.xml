@@ -1,25 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/extrato"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-    <include
-        layout="@layout/top_bar"
-        android:id="@+id/top_bar" />
 
     <HorizontalScrollView
         android:id="@+id/month_scroll"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
         android:fillViewport="true"
         android:scrollbars="none"
-        app:layout_constraintTop_toBottomOf="@id/top_bar"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:id="@+id/month_container"
@@ -27,18 +22,53 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <Button android:text="JAN" style="@style/BotaoMes" />
-            <Button android:text="FEV" style="@style/BotaoMes" />
-            <Button android:text="MAR" style="@style/BotaoMes" />
-            <Button android:text="ABR" style="@style/BotaoMes" />
-            <Button android:text="MAI" style="@style/BotaoMes" />
-            <Button android:text="JUN" style="@style/BotaoMes" />
-            <Button android:text="JUL" style="@style/BotaoMes" />
-            <Button android:text="AGO" style="@style/BotaoMes" />
-            <Button android:text="SET" style="@style/BotaoMes" />
-            <Button android:text="OUT" style="@style/BotaoMes" />
-            <Button android:text="NOV" style="@style/BotaoMes" />
-            <Button android:text="DEZ" style="@style/BotaoMes" />
+            <Button
+                style="@style/BotaoMes"
+                android:text="JAN" />
+
+            <Button
+                style="@style/BotaoMes"
+                android:text="FEV" />
+
+            <Button
+                style="@style/BotaoMes"
+                android:text="MAR" />
+
+            <Button
+                style="@style/BotaoMes"
+                android:text="ABR" />
+
+            <Button
+                style="@style/BotaoMes"
+                android:text="MAI" />
+
+            <Button
+                style="@style/BotaoMes"
+                android:text="JUN" />
+
+            <Button
+                style="@style/BotaoMes"
+                android:text="JUL" />
+
+            <Button
+                style="@style/BotaoMes"
+                android:text="AGO" />
+
+            <Button
+                style="@style/BotaoMes"
+                android:text="SET" />
+
+            <Button
+                style="@style/BotaoMes"
+                android:text="OUT" />
+
+            <Button
+                style="@style/BotaoMes"
+                android:text="NOV" />
+
+            <Button
+                style="@style/BotaoMes"
+                android:text="DEZ" />
 
         </LinearLayout>
     </HorizontalScrollView>

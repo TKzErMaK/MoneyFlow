@@ -9,6 +9,7 @@ import android.view.Gravity;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.activity.EdgeToEdge;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,18 +18,17 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-public class ListaMetasActivity extends AppCompatActivity {
+public class ListaMetasActivity extends BaseActivity {
 
     private ActivityResultLauncher<Intent> cadastroMetaLauncher;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.lista_metas);
-
-        ConstraintLayout topBar = findViewById(R.id.top_bar_metas);
-        TextView titulo = topBar.findViewById(R.id.txt_title);
-        titulo.setText(R.string.txt_dynamic_title_goal);
+        EdgeToEdge.enable(this);
+        setActivityContent(R.layout.lista_metas);
+        TextView txtTitle = findViewById(R.id.txt_titulo);
+        txtTitle.setText("Metas");
 
         cadastroMetaLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),

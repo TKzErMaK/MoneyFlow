@@ -2,33 +2,20 @@ package com.gb.trabalho;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioButton;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
-public class CadastroInvestimentoActivity extends AppCompatActivity {
+public class CadastroInvestimentoActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.cadastro_investimentos);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.top_bar), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
-        ConstraintLayout topBar = findViewById(R.id.top_bar);
-        TextView txtTitle = topBar.findViewById(R.id.txt_title);
+        setActivityContent(R.layout.cadastro_investimentos);
+        TextView txtTitle = findViewById(R.id.txt_titulo);
         txtTitle.setText("Investimento");
 
         Intent intent = getIntent();

@@ -3,7 +3,6 @@ package com.gb.trabalho;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -20,21 +19,15 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListaNotificacoesActivity extends AppCompatActivity {
+public class ListaNotificacoesActivity extends BaseActivity {
     FloatingActionButton btnadicionar;
     Intent intent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.lista_notificacoes);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.top_bar), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
-        ConstraintLayout topBar = findViewById(R.id.top_bar);
-        TextView txtTitle = topBar.findViewById(R.id.txt_title);
+        setActivityContent(R.layout.lista_notificacoes);
+        TextView txtTitle = findViewById(R.id.txt_titulo);
         txtTitle.setText("Notificações");
 
         RecyclerView recyclerView = findViewById(R.id.recycler_extrato);

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_Inicio"
+        android:title="Início" />
+
+    <item
+        android:id="@+id/nav_CadastroInvestimento"
+        android:title="Cadastro de Investimento" />
+
+    <item
+        android:id="@+id/nav_CadastroMeta"
+        android:title="Cadastro de Meta" />
+
+    <item
+        android:id="@+id/nav_CadastroMovimentacao"
+        android:title="Movimentação Financeira" />
+
+    <item
+        android:id="@+id/nav_CadastroNotificacao"
+        android:title="Cadastro de Notificação" />
+
+    <item
+        android:id="@+id/nav_Extrato"
+        android:title="Extrato" />
+
+    <item
+        android:id="@+id/nav_ListaInvestimentos"
+        android:title="Lista de Investimentos" />
+
+    <item
+        android:id="@+id/nav_ListaMetas"
+        android:title="Lista de Metas" />
+
+    <item
+        android:id="@+id/nav_ListaNotificacoes"
+        android:title="Lista de Notificações" />
+</menu>
+

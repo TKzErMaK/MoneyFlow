@@ -8,6 +8,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
@@ -19,7 +20,7 @@ import java.text.SimpleDateFormat;
 import java.util.Locale;
 import java.util.Objects;
 
-public class CadastroMetasActivity extends AppCompatActivity {
+public class CadastroMetasActivity extends BaseActivity {
 
     private TextInputEditText edtDescription, edtValue, edtStartDate, edtDeadline;
     private RadioGroup radioGroup;
@@ -27,11 +28,10 @@ public class CadastroMetasActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.cadastro_metas);
-
-        ConstraintLayout topBar = findViewById(R.id.top_bar_metas);
-        TextView titulo = topBar.findViewById(R.id.txt_title);
-        titulo.setText(R.string.txt_dynamic_title_goal);
+        EdgeToEdge.enable(this);
+        setActivityContent(R.layout.cadastro_metas);
+        TextView txtTitle = findViewById(R.id.txt_titulo);
+        txtTitle.setText("Meta");
 
         edtDescription = findViewById(R.id.edt_description);
         edtValue = findViewById(R.id.edt_value);

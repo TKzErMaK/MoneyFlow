@@ -6,7 +6,7 @@
     android:id="@+id/top_bar">
 
     <ImageView
-        android:id="@+id/img_title"
+        android:id="@+id/imagem_topbar"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:contentDescription="@string/img_title_description"
@@ -16,7 +16,7 @@
         app:srcCompat="@color/material_dynamic_neutral70" />
 
     <TextView
-        android:id="@+id/txt_title"
+        android:id="@+id/txt_titulo"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:gravity="center"
@@ -25,12 +25,12 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:textColor="@color/black"
         android:textSize="24sp"
-        app:layout_constraintEnd_toStartOf="@+id/btn_profile"
-        app:layout_constraintStart_toEndOf="@+id/btn_menu"
+        app:layout_constraintEnd_toStartOf="@+id/btn_direita"
+        app:layout_constraintStart_toEndOf="@+id/btn_esquerda"
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btn_menu"
+        android:id="@+id/btn_esquerda"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:clickable="true"
@@ -46,7 +46,7 @@
         app:tint="@color/black" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btn_profile"
+        android:id="@+id/btn_direita"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:clickable="true"
