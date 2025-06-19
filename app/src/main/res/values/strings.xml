@@ -40,5 +40,6 @@
     <string name="data_indefinida">Data não informada</string>
     <string name="descricao_indefinida">Descrição não informada</string>
     <string name="txt_goal_created">Metas criadas</string>
+    <string name="btn_excluir">EXCLUIR</string>
 
 </resources>

@@ -6,14 +6,11 @@ import android.view.View;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.gb.trabalho.Adapter.ItemListaAdapter;
+import com.gb.trabalho.Domain.ItemLista;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -32,8 +29,8 @@ public class ListaInvestimentosActivity extends BaseActivity {
 
         RecyclerView recyclerView = findViewById(R.id.recycler_extrato);
         List<ItemLista> itens = new ArrayList<>();
-        itens.add(new ItemLista("R$ 51.000,00", "CDB", "01/02/2019", 1));
-        itens.add(new ItemLista("R$ 12.000,00", "Ações", "24/03/2022", 1));
+        itens.add(new ItemLista("R$ 51.000,00", "CDB", "01/02/2019", 1,0, 0));
+        itens.add(new ItemLista("R$ 12.000,00", "Ações", "24/03/2022", 1,0,0));
 
         ItemListaAdapter adapter = new ItemListaAdapter(this, itens, item -> {
             Intent intent = new Intent(this, CadastroInvestimentoActivity.class);

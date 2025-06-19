@@ -1,4 +1,4 @@
-package com.gb.trabalho;
+package com.gb.trabalho.Adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,7 +9,7 @@ import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.gb.trabalho.ItemLista;
+import com.gb.trabalho.Domain.ItemLista;
 import com.gb.trabalho.R;
 
 import java.util.List;

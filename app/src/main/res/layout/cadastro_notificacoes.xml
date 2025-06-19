@@ -52,7 +52,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:hint="Prazo">
+                android:hint="Prazo (dias)">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/txt_prazo"
@@ -101,6 +101,17 @@
                 android:backgroundTint="@color/material_dynamic_neutral70"
                 android:fontFamily="sans-serif-medium"
                 android:text="@string/btn_save"
+                android:textAllCaps="true"
+                android:textColor="@android:color/black" />
+
+            <Button
+                android:id="@+id/btn_excluir"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="32dp"
+                android:backgroundTint="@color/material_dynamic_neutral70"
+                android:fontFamily="sans-serif-medium"
+                android:text="@string/btn_excluir"
                 android:textAllCaps="true"
                 android:textColor="@android:color/black" />
 
