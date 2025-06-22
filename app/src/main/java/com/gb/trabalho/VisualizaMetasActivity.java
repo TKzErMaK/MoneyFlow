@@ -10,9 +10,9 @@ import android.widget.TextView;
 import androidx.activity.EdgeToEdge;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 
+import com.gb.trabalho.DAO.MetaDAO;
+import com.gb.trabalho.Domain.Meta;
 import com.google.android.material.progressindicator.CircularProgressIndicator;
 
 import java.text.ParseException;
@@ -24,10 +24,8 @@ import java.util.Objects;
 public class VisualizaMetasActivity extends BaseActivity {
 
     private static final String TAG = "VisualizaMetasActivity";
-
-    private String descricao, valor, data;
-    private int prazo;
-    private boolean isReceita;
+    private Meta meta;
+    private int metaId;
 
     private ActivityResultLauncher<Intent> editMetaLauncher;
 
@@ -46,90 +44,90 @@ public class VisualizaMetasActivity extends BaseActivity {
         TextView txtProgressValue = findViewById(R.id.txt_progress_value);
         CircularProgressIndicator progressIndicator = findViewById(R.id.progress_goal);
 
-        // Recuperar dados recebidos pela Intent
-        descricao = getIntent().getStringExtra("descricao");
-        valor = getIntent().getStringExtra("valor");
-        prazo = getIntent().getIntExtra("prazo", 0);
-        data = getIntent().getStringExtra("data");
-        isReceita = getIntent().getBooleanExtra("isReceita", true);
+        // Recebe o ID da meta selecionada
+        metaId = getIntent().getIntExtra("id", -1);
+        if (metaId == -1) {
+            Log.e(TAG, "ID da meta não foi recebido.");
+            finish();
+            return;
+        }
+
+        // Buscar meta no banco
+        MetaDAO metaDAO = new MetaDAO(this);
+        meta = metaDAO.buscarPorId(metaId);
+
+        if (meta == null) {
+            Log.e(TAG, "Meta não encontrada no banco de dados.");
+            finish();
+            return;
+        }
 
         editMetaLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
                 result -> {
-                    if (result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {
-                        Intent dataIntent = result.getData();
-                        descricao = dataIntent.getStringExtra("descricao");
-                        valor = dataIntent.getStringExtra("valor");
-                        prazo = dataIntent.getIntExtra("prazo", 0);
-                        data = dataIntent.getStringExtra("data");
-                        isReceita = dataIntent.getBooleanExtra("isReceita", true);
-                        recreate(); // Recarrega a tela com os novos dados
+                    if (result.getResultCode() == Activity.RESULT_OK) {
+                        // Recarrega meta atualizada do banco
+                        meta = metaDAO.buscarPorId(metaId);
+                        preencherCampos(txtGoalTitle, txtGoalValue, txtGoalDeadline, txtGoalDaysRemaining, txtProgressValue, progressIndicator);
                     }
                 }
         );
 
-        // Preenche os campos da tela
-        if (descricao != null && !descricao.trim().isEmpty()) {
-            txtGoalTitle.setText(descricao);
-        } else {
-            txtGoalTitle.setText(R.string.descricao_indefinida);
-        }
-
-        if (valor != null && !valor.trim().isEmpty()) {
-            txtGoalValue.setText(getString(R.string.formatted_value, valor));
-        } else {
-            txtGoalValue.setText(R.string.valor_indefinido);
-        }
-
-        if (data != null && !data.trim().isEmpty()) {
-            int diasRestantes = calcularDiasRestantes(data, prazo);
-
-            try {
-                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
-                Date dataInicial = sdf.parse(data);
-                if (dataInicial != null) {
-                    long dataFinalMillis = dataInicial.getTime() + (long) prazo * 24 * 60 * 60 * 1000;
-                    Date dataFinal = new Date(dataFinalMillis);
-                    String dataFinalFormatada = sdf.format(dataFinal);
-                    txtGoalDeadline.setText(dataFinalFormatada);
-                } else {
-                    txtGoalDeadline.setText(R.string.data_indefinida);
-                }
-            } catch (ParseException e) {
-                Log.e(TAG, "Erro ao calcular data final: " + data, e);
-                txtGoalDeadline.setText(R.string.data_indefinida);
-            }
-
-            if (diasRestantes >= 0) {
-                txtGoalDaysRemaining.setText(getString(R.string.days_remaining_format, diasRestantes));
-            } else {
-                txtGoalDaysRemaining.setText(R.string.expired_deadline);
-            }
-        } else {
-            txtGoalDeadline.setText(R.string.data_indefinida);
-            txtGoalDaysRemaining.setText(R.string.data_indefinida);
-        }
-
-        // Simulação de progresso
-        int progresso = 0;
-        txtProgressValue.setText(String.format(Locale.getDefault(), getString(R.string.progress_format), progresso));
-        progressIndicator.setProgress(progresso);
+        preencherCampos(txtGoalTitle, txtGoalValue, txtGoalDeadline, txtGoalDaysRemaining, txtProgressValue, progressIndicator);
 
         // Botão de editar
         Button btnEditGoal = findViewById(R.id.btn_edit_goal);
         btnEditGoal.setOnClickListener(v -> {
             Intent intent = new Intent(VisualizaMetasActivity.this, CadastroMetasActivity.class);
-            intent.putExtra("descricao", descricao);
-            if (valor != null) {
-                String valorLimpo = valor.replace("R$", "").replaceAll("\\s+", "").replace(",", ".");
-                intent.putExtra("valor", valorLimpo);
-            }
-            intent.putExtra("data", data);
-            intent.putExtra("prazo", prazo);
-            intent.putExtra("isReceita", isReceita);
-
+            intent.putExtra("id", meta.getId());
+            intent.putExtra("descricao", meta.getDescricao());
+            intent.putExtra("valor", String.valueOf(meta.getValor()));
+            intent.putExtra("data", meta.getDataInicio());
+            intent.putExtra("prazo", meta.getPrazo());
+            intent.putExtra("isReceita", meta.getTipo() == 1);
             editMetaLauncher.launch(intent);
         });
+    }
+
+    private void preencherCampos(TextView titulo, TextView valor, TextView deadline, TextView diasRestantes, TextView progressoTexto, CircularProgressIndicator progresso) {
+        titulo.setText(meta.getDescricao());
+        valor.setText(getString(R.string.formatted_value, String.format(Locale.getDefault(), "%.2f", meta.getValor())));
+
+        String dataInicio = meta.getDataInicio();
+        int prazo = meta.getPrazo();
+
+        if (dataInicio != null && !dataInicio.trim().isEmpty()) {
+            int dias = calcularDiasRestantes(dataInicio, prazo);
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+            try {
+                Date dataInicial = sdf.parse(dataInicio);
+                if (dataInicial != null) {
+                    long dataFinalMillis = dataInicial.getTime() + (long) prazo * 24 * 60 * 60 * 1000;
+                    Date dataFinal = new Date(dataFinalMillis);
+                    String dataFinalFormatada = sdf.format(dataFinal);
+                    deadline.setText(dataFinalFormatada);
+                } else {
+                    deadline.setText(R.string.data_indefinida);
+                }
+            } catch (ParseException e) {
+                Log.e(TAG, "Erro ao calcular data final: " + dataInicio, e);
+                deadline.setText(R.string.data_indefinida);
+            }
+
+            if (dias >= 0) {
+                diasRestantes.setText(getString(R.string.days_remaining_format, dias));
+            } else {
+                diasRestantes.setText(R.string.expired_deadline);
+            }
+        } else {
+            deadline.setText(R.string.data_indefinida);
+            diasRestantes.setText(R.string.data_indefinida);
+        }
+
+        // Simulação de progresso (valor fixo como placeholder)
+        int progressoAtual = 0;
+        progressoTexto.setText(String.format(Locale.getDefault(), getString(R.string.progress_format), progressoAtual));
+        progresso.setProgress(progressoAtual);
     }
 
     private int calcularDiasRestantes(String dataInicio, int prazo) {

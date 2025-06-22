@@ -6,12 +6,14 @@
     android:layout_height="match_parent">
 
     <ScrollView
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="16dp"
+        android:fillViewport="true"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -32,7 +34,6 @@
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:layout_marginTop="16dp"
-                android:progress="49"
                 android:indeterminate="false"
                 app:indicatorColor="@color/material_dynamic_primary70"
                 app:indicatorInset="16dp"
@@ -83,7 +84,6 @@
                     android:id="@+id/txt_goal_days_remaining"
                     style="@style/DefaultLabel"
                     android:text="@string/txt_days_remaining_example" />
-
             </LinearLayout>
 
             <Button
@@ -97,7 +97,6 @@
                 android:text="@string/btn_edit"
                 android:textAllCaps="true"
                 android:textColor="@android:color/black" />
-
         </LinearLayout>
 
     </ScrollView>

@@ -12,15 +12,20 @@ import android.widget.TextView;
 import androidx.activity.EdgeToEdge;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
-import androidx.constraintlayout.widget.ConstraintLayout;
 
+import com.gb.trabalho.DAO.MetaDAO;
+import com.gb.trabalho.Domain.Meta;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.text.NumberFormat;
+import java.util.List;
+import java.util.Locale;
 
 public class ListaMetasActivity extends BaseActivity {
 
     private ActivityResultLauncher<Intent> cadastroMetaLauncher;
+    private MetaDAO metaDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,18 +35,13 @@ public class ListaMetasActivity extends BaseActivity {
         TextView txtTitle = findViewById(R.id.txt_titulo);
         txtTitle.setText("Metas");
 
+        metaDAO = new MetaDAO(this);
+
         cadastroMetaLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
                 result -> {
                     if (result.getResultCode() == RESULT_OK && result.getData() != null) {
-                        Intent data = result.getData();
-                        String descricao = data.getStringExtra("descricao");
-                        String valor = data.getStringExtra("valor");
-                        String dataMeta = data.getStringExtra("data");
-                        int prazo = data.getIntExtra("prazo", 0);
-                        boolean isReceita = data.getBooleanExtra("isReceita", true);
-
-                        adicionarCard(descricao, valor, dataMeta, prazo, isReceita);
+                        carregarMetas();
                     }
                 }
         );
@@ -51,9 +51,22 @@ public class ListaMetasActivity extends BaseActivity {
             Intent intent = new Intent(ListaMetasActivity.this, CadastroMetasActivity.class);
             cadastroMetaLauncher.launch(intent);
         });
+
+        carregarMetas();
     }
 
-    private void adicionarCard(String descricao, String valor, String data, int prazo, boolean isReceita) {
+    private void carregarMetas() {
+        LinearLayout container = findViewById(R.id.goals_container);
+        container.removeAllViews();
+
+        List<Meta> metas = metaDAO.listarTodos();
+
+        for (Meta meta : metas) {
+            adicionarCard(meta);
+        }
+    }
+
+    private void adicionarCard(Meta meta) {
         LinearLayout container = findViewById(R.id.goals_container);
 
         CardView card = new CardView(this);
@@ -64,21 +77,24 @@ public class ListaMetasActivity extends BaseActivity {
         layout.setOrientation(LinearLayout.VERTICAL);
         layout.setPadding(24, 24, 24, 24);
 
+        NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
+        String valorFormatado = nf.format(meta.getValor());
+
         TextView txtValor = new TextView(this);
-        txtValor.setText(valor);
+        txtValor.setText(valorFormatado);
         txtValor.setTextSize(16);
         txtValor.setTextColor(Color.parseColor("#000000"));
         txtValor.setTypeface(Typeface.DEFAULT_BOLD);
 
         TextView txtDescricao = new TextView(this);
-        txtDescricao.setText(descricao);
+        txtDescricao.setText(meta.getDescricao());
         txtDescricao.setTextSize(14);
 
         TextView txtData = new TextView(this);
-        txtData.setText(data);
+        txtData.setText(meta.getDataInicio());
         txtData.setGravity(Gravity.END);
 
-        int corTextoData = isReceita ? Color.parseColor("#1A237E") : Color.parseColor("#880E4F");
+        int corTextoData = meta.getTipo() == 1 ? Color.parseColor("#1A237E") : Color.parseColor("#880E4F");
         txtData.setTextColor(corTextoData);
 
         layout.addView(txtValor);
@@ -87,7 +103,7 @@ public class ListaMetasActivity extends BaseActivity {
 
         card.addView(layout);
 
-        int cor = isReceita ? Color.parseColor("#D0E7FF") : Color.parseColor("#FFE3E3");
+        int cor = meta.getTipo() == 1 ? Color.parseColor("#D0E7FF") : Color.parseColor("#FFE3E3");
         card.setCardBackgroundColor(cor);
 
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
@@ -98,11 +114,11 @@ public class ListaMetasActivity extends BaseActivity {
 
         card.setOnClickListener(v -> {
             Intent intent = new Intent(this, VisualizaMetasActivity.class);
-            intent.putExtra("descricao", descricao);
-            intent.putExtra("valor", valor);
-            intent.putExtra("data", data);
-            intent.putExtra("prazo", prazo);
-            Log.d("ListaMetas", "Abrindo meta: " + descricao + ", " + valor + ", " + prazo + ", " + data);
+            intent.putExtra("descricao", meta.getDescricao());
+            intent.putExtra("valor", valorFormatado);
+            intent.putExtra("data", meta.getDataInicio());
+            intent.putExtra("prazo", meta.getPrazo());
+            intent.putExtra("isReceita", meta.getTipo() == 1);
             startActivity(intent);
         });
 

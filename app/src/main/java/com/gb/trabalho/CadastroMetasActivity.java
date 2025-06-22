@@ -9,9 +9,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
-
+import com.gb.trabalho.DAO.MetaDAO;
+import com.gb.trabalho.Domain.Meta;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.text.NumberFormat;
@@ -24,6 +23,8 @@ public class CadastroMetasActivity extends BaseActivity {
 
     private TextInputEditText edtDescription, edtValue, edtStartDate, edtDeadline;
     private RadioGroup radioGroup;
+    private boolean isEdit = false;
+    private int metaId = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,15 +43,20 @@ public class CadastroMetasActivity extends BaseActivity {
 
         Intent intent = getIntent();
         if (intent != null) {
+            metaId = intent.getIntExtra("id", -1);
             String descricao = intent.getStringExtra("descricao");
             String valor = intent.getStringExtra("valor");
             String data = intent.getStringExtra("data");
             int prazo = intent.getIntExtra("prazo", 0);
+            boolean isReceita = intent.getBooleanExtra("isReceita", true);
 
             if (descricao != null) edtDescription.setText(descricao);
             if (valor != null) edtValue.setText(valor);
             if (data != null) edtStartDate.setText(data);
             if (prazo > 0) edtDeadline.setText(String.valueOf(prazo));
+            radioGroup.check(isReceita ? R.id.rb_income : R.id.rb_expense);
+
+            isEdit = metaId != -1;
         }
 
         btnSave.setOnClickListener(view -> {
@@ -78,7 +84,7 @@ public class CadastroMetasActivity extends BaseActivity {
             return false;
         }
 
-        if (!valorStr.matches("^\\d+(.\\d{1,2})?$")) {
+        if (!valorStr.matches("^\\d+(\\.\\d{1,2})?$")) {
             edtValue.setError("Valor inválido. Ex: 1000.00");
             edtValue.requestFocus();
             return false;
@@ -97,28 +103,24 @@ public class CadastroMetasActivity extends BaseActivity {
         }
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
-        sdf.setLenient(false); // Não permite datas inválidas como 31/02
+        sdf.setLenient(false);
 
         try {
             sdf.parse(dataInicio);
-
             String[] partes = dataInicio.split("/");
             int dia = Integer.parseInt(partes[0]);
             int mes = Integer.parseInt(partes[1]);
             int ano = Integer.parseInt(partes[2]);
-
             if (dia <= 0 || mes <= 0 || mes > 12 || ano <= 0) {
                 edtStartDate.setError("Data inválida");
                 edtStartDate.requestFocus();
                 return false;
             }
-
         } catch (ParseException e) {
             edtStartDate.setError("Data inválida");
             edtStartDate.requestFocus();
             return false;
         }
-
 
         if (prazoStr.isEmpty()) {
             edtDeadline.setError("Prazo obrigatório");
@@ -129,7 +131,7 @@ public class CadastroMetasActivity extends BaseActivity {
         try {
             int prazo = Integer.parseInt(prazoStr);
             if (prazo < 0) {
-                edtDeadline.setError("Prazo deve ser zero ou ma00ior");
+                edtDeadline.setError("Prazo deve ser zero ou maior");
                 edtDeadline.requestFocus();
                 return false;
             }
@@ -147,27 +149,28 @@ public class CadastroMetasActivity extends BaseActivity {
         return true;
     }
 
-
     private void salvarMeta() {
         String descricao = Objects.requireNonNull(edtDescription.getText()).toString();
-        String valorStr = Objects.requireNonNull(edtValue.getText()).toString();
-        double valorDouble = Double.parseDouble(valorStr.replace(",", "."));
+        String valorTexto = Objects.requireNonNull(edtValue.getText()).toString().replace(",", ".");
+        double valor = Double.parseDouble(valorTexto);
         String data = Objects.requireNonNull(edtStartDate.getText()).toString();
         int prazo = Integer.parseInt(Objects.requireNonNull(edtDeadline.getText()).toString());
-        boolean isReceita = radioGroup.getCheckedRadioButtonId() == R.id.rb_income;
+        int tipo = radioGroup.getCheckedRadioButtonId() == R.id.rb_income ? 1 : 0;
 
-        NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
-        String valorFormatado = nf.format(valorDouble);
+        Meta meta = new Meta(descricao, valor, data, prazo, tipo);
 
-        Intent resultIntent = new Intent();
-        resultIntent.putExtra("descricao", descricao);
-        resultIntent.putExtra("valor", valorFormatado);
-        resultIntent.putExtra("data", data);
-        resultIntent.putExtra("prazo", prazo);
-        resultIntent.putExtra("isReceita", isReceita);
-        setResult(Activity.RESULT_OK, resultIntent);
+        MetaDAO metaDAO = new MetaDAO(this);
+
+        if (isEdit) {
+            meta.setId(metaId);
+            metaDAO.alterar(meta);
+            Toast.makeText(this, "Meta atualizada com sucesso!", Toast.LENGTH_SHORT).show();
+        } else {
+            metaDAO.inserir(meta);
+            Toast.makeText(this, "Meta cadastrada com sucesso!", Toast.LENGTH_SHORT).show();
+        }
+
+        setResult(Activity.RESULT_OK);
         finish();
-
-        Toast.makeText(this, "Meta cadastrada com sucesso!", Toast.LENGTH_SHORT).show();
     }
 }
