@@ -24,7 +24,7 @@ public class InvestimentoDAO {
         values.put("valor", investimento.getValor());
         values.put("data_inicio", investimento.getDataInicio());
         values.put("percentual_rentabilidade", investimento.getPercentualRentabilidade());
-        values.put("prazo", investimento.getPrazo());
+        values.put("frequencia", investimento.getFrequencia());
         return db.insert("investimento", null, values);
     }
 
@@ -34,7 +34,7 @@ public class InvestimentoDAO {
         values.put("valor", investimento.getValor());
         values.put("data_inicio", investimento.getDataInicio());
         values.put("percentual_rentabilidade", investimento.getPercentualRentabilidade());
-        values.put("prazo", investimento.getPrazo());
+        values.put("frequencia", investimento.getFrequencia());
         return db.update("investimento", values, "id = ?", new String[]{String.valueOf(investimento.getId())});
     }
 
@@ -51,7 +51,7 @@ public class InvestimentoDAO {
             i.setValor(cursor.getDouble(cursor.getColumnIndexOrThrow("valor")));
             i.setDataInicio(cursor.getString(cursor.getColumnIndexOrThrow("data_inicio")));
             i.setPercentualRentabilidade(cursor.getDouble(cursor.getColumnIndexOrThrow("percentual_rentabilidade")));
-            i.setPrazo(cursor.getInt(cursor.getColumnIndexOrThrow("prazo")));
+            i.setFrequencia(cursor.getString(cursor.getColumnIndexOrThrow("frequencia")));
             cursor.close();
             return i;
         }
@@ -69,7 +69,7 @@ public class InvestimentoDAO {
             i.setValor(cursor.getDouble(cursor.getColumnIndexOrThrow("valor")));
             i.setDataInicio(cursor.getString(cursor.getColumnIndexOrThrow("data_inicio")));
             i.setPercentualRentabilidade(cursor.getDouble(cursor.getColumnIndexOrThrow("percentual_rentabilidade")));
-            i.setPrazo(cursor.getInt(cursor.getColumnIndexOrThrow("prazo")));
+            i.setFrequencia(cursor.getString(cursor.getColumnIndexOrThrow("frequencia")));
             lista.add(i);
         }
         cursor.close();

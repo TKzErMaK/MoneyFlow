@@ -7,17 +7,17 @@ public class Investimento {
     private double valor;
     private String dataInicio;
     private double percentualRentabilidade;
-    private int prazo;
+    private String frequencia;;
 
     public Investimento() {
     }
 
-    public Investimento(String descricao, double valor, String dataInicio, double percentualRentabilidade, int prazo) {
+    public Investimento(int id, String descricao, double valor, String dataInicio, double percentualRentabilidade, String frequencia) {
         this.descricao = descricao;
         this.valor = valor;
         this.dataInicio = dataInicio;
         this.percentualRentabilidade = percentualRentabilidade;
-        this.prazo = prazo;
+        this.frequencia = frequencia;
     }
     public int getId() {
         return id;
@@ -59,11 +59,11 @@ public class Investimento {
         this.percentualRentabilidade = percentualRentabilidade;
     }
 
-    public int getPrazo() {
-        return prazo;
+    public String getFrequencia() {
+        return frequencia;
     }
 
-    public void setPrazo(int prazo) {
-        this.prazo = prazo;
+    public void setFrequencia(String frequencia) {
+        this.frequencia = frequencia;
     }
 }

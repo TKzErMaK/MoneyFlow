@@ -54,7 +54,7 @@
                 android:hint="Data de início">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/txt_data"
+                    android:id="@+id/txt_data_inicio"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="date" />
@@ -82,10 +82,10 @@
                 android:hint="Prazo">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/txt_prazo"
+                    android:id="@+id/txt_frequencia"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="number" />
+                    android:inputType="text" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
