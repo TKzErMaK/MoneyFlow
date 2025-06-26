@@ -6,13 +6,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
-import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.gb.trabalho.DAO.InvestimentoDAO;
 import com.gb.trabalho.Domain.Investimento;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class CadastroInvestimentoActivity extends BaseActivity {
 
@@ -23,6 +22,7 @@ public class CadastroInvestimentoActivity extends BaseActivity {
     EditText edtFrequencia;
     Button btnGravar;
 
+    private Investimento investimento;
     private InvestimentoDAO investimentoDAO;
 
     @Override
@@ -39,22 +39,16 @@ public class CadastroInvestimentoActivity extends BaseActivity {
         edtDataInicio = findViewById(R.id.txt_data);
         edtRentabilidade = findViewById(R.id.txt_rentabilidade);
         edtFrequencia = findViewById(R.id.txt_frequencia);
-/*
-        Intent intent = getIntent();
-        if (intent != null) {
-            String descricao = intent.getStringExtra("descricao");
-            String valor = intent.getStringExtra("valor");
-            String data_inicio = intent.getStringExtra("data_inicio");
-            String rentabilidade = intent.getStringExtra("rentabilidade");
-            String frequencia = intent.getStringExtra("frequencia");
 
-            edtValor.setText(valor);
-            edtDescricao.setText(descricao);
-            edtDataInicio.setText(data_inicio);
-            edtRentabilidade.setText(rentabilidade);
-            edtFrequencia.setText(frequencia);
+        investimentoDAO = new InvestimentoDAO(this);
+
+        // Verifica se esta Activity foi iniciada para editar uma lista existente
+        long idInvestimento = getIntent().getLongExtra("id_investimento", -1);
+
+        if (idInvestimento != -1){
+
         }
-*/
+
         // Iniciar o DAO para salvar os dados
         btnGravar = findViewById(R.id.btn_gravar);
         btnGravar.setOnClickListener(new View.OnClickListener() {
@@ -100,9 +94,31 @@ public class CadastroInvestimentoActivity extends BaseActivity {
         try {
             double valor = Double.parseDouble(strValor);
             float rentabilidade = Float.parseFloat(strRentabilidade);
-
+/*
             // Criar um novo investimento
-            Investimento novoInvestimento = new Investimento(0, descricao, valor, data_inicio, rentabilidade, frequencia);
+            if (investimento.getId() == 0){ // Novo investimento
+                investimento = new Investimento(descricao, valor, data_inicio, rentabilidade, frequencia);
+                long idInvestimento = investimentoDAO.inserir(investimento);
+
+                Toast.makeText(this, "Investimento salvo!", Toast.LENGTH_SHORT).show();
+            }else { // Investimento existente (atualizar)
+                investimento.setDescricao(descricao);
+                investimento.setValor(valor);
+                investimento.setDataInicio(data_inicio);
+                investimento.setPercentualRentabilidade(rentabilidade);
+                investimento.setFrequencia(frequencia);
+                investimentoDAO.alterar(investimento);
+
+                Toast.makeText(this, "Investimento atualizado!", Toast.LENGTH_SHORT).show();
+            }
+*/
+            // Volta para MainActivity
+            Intent intent = new Intent(CadastroInvestimentoActivity.this, ListaInvestimentosActivity.class);
+            // Limpar a pilha de atividades
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+            // Fechar a activity atual
+            finish();
 
         } catch (Exception e) {
             return;
