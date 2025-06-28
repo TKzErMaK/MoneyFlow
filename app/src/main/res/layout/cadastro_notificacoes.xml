@@ -77,13 +77,13 @@
                     tools:ignore="UselessParent">
 
                     <RadioButton
-                        android:id="@+id/rb_receita"
+                        android:id="@+id/rb_valor"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="VALOR" />
 
                     <RadioButton
-                        android:id="@+id/rb_despesa"
+                        android:id="@+id/rb_tempo"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="32dp"

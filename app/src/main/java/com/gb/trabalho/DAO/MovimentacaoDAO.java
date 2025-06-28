@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.icu.util.Calendar;
 
 import com.gb.trabalho.Helper.DatabaseHelper;
 import com.gb.trabalho.Domain.Movimentacao;
@@ -43,30 +44,76 @@ public class MovimentacaoDAO {
     public int deletar(int id) {
         return db.delete("movimentacao", "id = ?", new String[]{String.valueOf(id)});
     }
+    public double buscarSaldo() {
+        double receita = 0.0;
+        double despesa = 0.0;
 
-    public Movimentacao buscarPorId(int id) {
-        Cursor cursor = db.query("movimentacao", null, "id = ?", new String[]{String.valueOf(id)}, null, null, null);
+        Cursor cursorReceita = db.rawQuery("SELECT SUM(valor) FROM movimentacao WHERE tipo = 1", null);
+        if (cursorReceita.moveToFirst()) {
+            receita = cursorReceita.isNull(0) ? 0.0 : cursorReceita.getDouble(0);
+        }
+        cursorReceita.close();
+        
+        Cursor cursorDespesa = db.rawQuery("SELECT SUM(valor) FROM movimentacao WHERE tipo = 0", null);
+        if (cursorDespesa.moveToFirst()) {
+            despesa = cursorDespesa.isNull(0) ? 0.0 : cursorDespesa.getDouble(0);
+        }
+        cursorDespesa.close();
+
+        return receita - despesa;
+    }
+    public double buscarReceitaPeriodo(String dataInicial) {
+        double receita = 0.0;
+        String dataAtual = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(new Date());
+
+        Cursor cursor = db.rawQuery(
+                "SELECT SUM(valor) FROM movimentacao WHERE tipo = 1 AND data BETWEEN ? AND ?",
+                new String[]{dataInicial, dataAtual}
+        );
+
         if (cursor.moveToFirst()) {
-            Movimentacao m = new Movimentacao();
-            m.setId(cursor.getInt(cursor.getColumnIndexOrThrow("id")));
-            m.setDescricao(cursor.getString(cursor.getColumnIndexOrThrow("descricao")));
-            m.setValor(cursor.getDouble(cursor.getColumnIndexOrThrow("valor")));
-            try {
-                m.setData(dateFormat.parse(cursor.getString(cursor.getColumnIndexOrThrow("data"))));
-            } catch (Exception e) {
-                m.setData(new Date());
-            }
-            m.setTipo(cursor.getInt(cursor.getColumnIndexOrThrow("tipo")));
-            cursor.close();
-            return m;
+            receita = cursor.isNull(0) ? 0.0 : cursor.getDouble(0);
         }
         cursor.close();
-        return null;
+        return receita;
     }
 
-    public List<Movimentacao> listarTodos() {
+    public double buscarDespesaPeriodo(String dataInicial) {
+        double despesa = 0.0;
+        String dataAtual = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(new Date());
+
+        Cursor cursor = db.rawQuery(
+                "SELECT SUM(valor) FROM movimentacao WHERE tipo = 0 AND data BETWEEN ? AND ?",
+                new String[]{dataInicial, dataAtual}
+        );
+
+        if (cursor.moveToFirst()) {
+            despesa = cursor.isNull(0) ? 0.0 : cursor.getDouble(0);
+        }
+        cursor.close();
+        return despesa;
+    }
+
+    public List<Movimentacao> listarPorMes(int mes, int ano) {
         List<Movimentacao> lista = new ArrayList<>();
-        Cursor cursor = db.query("movimentacao", null, null, null, null, null, null);
+
+        SimpleDateFormat dataString = new SimpleDateFormat("dd/MM/yyyy");
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(ano, mes - 1, 1);
+        Date dataInicio = calendar.getTime();
+
+        calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
+        Date dataFim = calendar.getTime();
+
+        String dataInicioStr = dataString.format(dataInicio);
+        String dataFimStr = dataString.format(dataFim);
+
+        String selection = "data BETWEEN ? AND ?";
+        String[] selectionArgs = { dataInicioStr, dataFimStr };
+
+        Cursor cursor = db.query("movimentacao", null, selection, selectionArgs, null, null, null);
+
         while (cursor.moveToNext()) {
             Movimentacao m = new Movimentacao();
             m.setId(cursor.getInt(cursor.getColumnIndexOrThrow("id")));
@@ -80,7 +127,9 @@ public class MovimentacaoDAO {
             m.setTipo(cursor.getInt(cursor.getColumnIndexOrThrow("tipo")));
             lista.add(m);
         }
+
         cursor.close();
         return lista;
     }
+
 }

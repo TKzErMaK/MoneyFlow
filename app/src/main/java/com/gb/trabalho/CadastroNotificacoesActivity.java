@@ -19,7 +19,7 @@ import java.util.Date;
 public class CadastroNotificacoesActivity extends BaseActivity {
 
     EditText edtValor, edtDescricao, edtPrazo;
-    RadioButton rbReceita, rbDespesa;
+    RadioButton rbValor, rbTempo;
     Button btnSalvar, btnExcluir;
     int id = 0;
 
@@ -35,8 +35,8 @@ public class CadastroNotificacoesActivity extends BaseActivity {
         edtValor = findViewById(R.id.txt_valor);
         edtDescricao = findViewById(R.id.txt_descricao);
         edtPrazo = findViewById(R.id.txt_prazo);
-        rbReceita = findViewById(R.id.rb_receita);
-        rbDespesa = findViewById(R.id.rb_despesa);
+        rbValor = findViewById(R.id.rb_valor);
+        rbTempo = findViewById(R.id.rb_tempo);
         btnSalvar = findViewById(R.id.btn_gravar);
         btnExcluir = findViewById(R.id.btn_excluir);
 
@@ -53,9 +53,9 @@ public class CadastroNotificacoesActivity extends BaseActivity {
             edtPrazo.setText(String.valueOf(prazo));
 
             if (tipo == 1) {
-                rbReceita.setChecked(true);
+                rbValor.setChecked(true);
             } else {
-                rbDespesa.setChecked(true);
+                rbTempo.setChecked(true);
             }
         }
 
@@ -81,7 +81,7 @@ public class CadastroNotificacoesActivity extends BaseActivity {
 
         double valor = valorStr.isEmpty() ? 0.0 : converteValor(valorStr);
         int prazo = prazoStr.isEmpty() ? 0 : Integer.parseInt(prazoStr);
-        int tipo = rbReceita.isChecked() ? 1 : 0;
+        int tipo = rbValor.isChecked() ? 1 : 0;
 
         if (descricao.isEmpty()) {
             Toast.makeText(this, "Descrição não informada", Toast.LENGTH_SHORT).show();
@@ -98,7 +98,7 @@ public class CadastroNotificacoesActivity extends BaseActivity {
         notificacao.setValor(valor);
         notificacao.setPrazo(prazo);
         notificacao.setTipo(tipo);
-        notificacao.setData(DefineData(prazo));
+        notificacao.setDataInicio(DefineData(prazo));
         notificacao.setId(id);
 
         NotificacaoDAO dao = new NotificacaoDAO(this);

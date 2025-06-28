@@ -9,17 +9,18 @@ public class Notificacao {
     private double valor;
     private int prazo;
     private int tipo;
-    private Date data;
+    private Date dataInicio;
 
-    public Notificacao() {
-    }
+    public Notificacao(){}
 
-    public Notificacao(String descricao, double valor, int prazo, int tipo, Date data) {
+    public Notificacao(String descricao, double valor, int prazo, int tipo, Date dataInicio) {
         this.descricao = descricao;
         this.valor = valor;
         this.prazo = prazo;
         this.tipo = tipo;
+        this.dataInicio = dataInicio;
     }
+
     public int getId() {
         return id;
     }
@@ -59,12 +60,11 @@ public class Notificacao {
     public void setTipo(int tipo) {
         this.tipo = tipo;
     }
-
-    public Date getData() {
-        return data;
+    public Date getDataInicio() {
+        return dataInicio;
+    }
+    public void setDataInicio(Date dataInicio) {
+        this.dataInicio = dataInicio;
     }
 
-    public void setData(Date data) {
-        this.data = data;
-    }
 }

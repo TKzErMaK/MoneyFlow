@@ -49,7 +49,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "valor REAL, " +
                 "prazo INTEGER, " +
                 "tipo INTEGER, " +
-                "data TEXT)";
+                "dataInicio TEXT)";
 
         db.execSQL(createMovimentacao);
         db.execSQL(createInvestimento);

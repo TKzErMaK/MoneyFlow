@@ -1,7 +1,9 @@
 package com.gb.trabalho;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Color;
+import android.icu.util.Calendar;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -14,13 +16,25 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.gb.trabalho.Adapter.InvestimentoAdapter;
+import com.gb.trabalho.DAO.InvestimentoDAO;
+import com.gb.trabalho.DAO.MovimentacaoDAO;
+import com.gb.trabalho.DAO.NotificacaoDAO;
+import com.gb.trabalho.Domain.Investimento;
+import com.gb.trabalho.Domain.Movimentacao;
+import com.gb.trabalho.Domain.Notificacao;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 
 import java.text.NumberFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -29,7 +43,11 @@ public class MainActivity extends BaseActivity {
     Button btnmovimentacao, btnextrato, btninvestimentos, btnnotificacoes, btnmetas;
     Intent intent;
     TextView txtinvestimentos, txtsaldo;
-    double totalInvestimentos = 0, saldo=0;
+    double totalInvestimentos = 0, saldo = 0;
+    InvestimentoDAO investimentoDAO;
+    MovimentacaoDAO movimentacaoDAO;
+    NotificacaoDAO notificacaoDAO;
+    InvestimentoAdapter investimentoAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +56,9 @@ public class MainActivity extends BaseActivity {
         setActivityContent(R.layout.main);
         CarregarGrafico();
         CarregaSaldo();
+        notificacaoDAO = new NotificacaoDAO(this);
+        notificacaoDAO.deletarNotificacoesVencidas();
+        exibirNotificacao();
 
         txtsaldo = findViewById(R.id.txt_saldo);
         txtinvestimentos = findViewById(R.id.txt_investimentos);
@@ -91,18 +112,27 @@ public class MainActivity extends BaseActivity {
             }
         });
     }
+
     private void CarregaSaldo() {
-        // consulta o saldo do extrato no mês corrente
-        saldo = 658.47;
+        movimentacaoDAO = new MovimentacaoDAO(this);
+        saldo = movimentacaoDAO.buscarSaldo();
     }
 
     private void CarregarGrafico() {
+
+        investimentoDAO = new InvestimentoDAO(this);
+
+        List<Investimento> investimentos = investimentoDAO.listarTodos();
+
+        investimentoAdapter = new InvestimentoAdapter();
+
         PieChart pieChart = findViewById(R.id.pieChart);
-        List<PieEntry> entries = new ArrayList<>();
-        entries.add(new PieEntry(81596.00f, "CDB"));
+        List<PieEntry> entries = investimentoAdapter.converterParaPieEntries(investimentos);
+
+        /*entries.add(new PieEntry(81596.00f, "CDB"));
         entries.add(new PieEntry(31256.00f, "Ações"));
         entries.add(new PieEntry(253416.00f, "Imóveis"));
-        entries.add(new PieEntry(5527.00f, "Espécie"));
+        entries.add(new PieEntry(5527.00f, "Espécie"));*/
 
         for (PieEntry entry : entries) {
             totalInvestimentos += entry.getValue();
@@ -133,5 +163,41 @@ public class MainActivity extends BaseActivity {
         pieChart.getLegend().setEnabled(false);
 
         pieChart.invalidate();
+    }
+
+    private void exibirNotificacao() {
+
+        NotificacaoDAO notificacaodao = new NotificacaoDAO(this);
+        List<Notificacao> notificacoes = new ArrayList<>();
+        notificacoes = notificacaodao.listarTodos();
+
+        for (Notificacao notificacao : notificacoes) {
+
+            //notificação por prazo
+            if (notificacao.getTipo() == 0) {
+                try {
+                    SimpleDateFormat dataString = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+                    Date dataInicio = dataString.parse(notificacao.getDataInicio().toString());
+
+                    Calendar calendar = Calendar.getInstance();
+                    calendar.setTime(dataInicio);
+                    calendar.add(Calendar.DAY_OF_MONTH, notificacao.getPrazo());
+                    Date dataVencimento = calendar.getTime();
+
+                    Calendar hoje = Calendar.getInstance();
+
+                    if (dataString.format(dataVencimento).equals(dataString.format(hoje.getTime()))) {
+                        new AlertDialog.Builder(this)
+                                .setTitle("Notificação")
+                                .setMessage(notificacao.getDescricao())
+                                .setPositiveButton("OK", null)
+                                .show();
+                    }
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        }
     }
 }

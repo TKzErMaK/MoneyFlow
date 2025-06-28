@@ -2,7 +2,6 @@ package com.gb.trabalho;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -42,7 +41,7 @@ public class ListaNotificacoesActivity extends BaseActivity {
         for (Notificacao notificacao : notificacoes) {
             String valor = String.valueOf("R$ " + notificacao.getValor());
             String descricao = notificacao.getDescricao();
-            Date data = notificacao.getData();
+            Date data = notificacao.getDataInicio();
             String dataString = (data != null) ? data.toString() : "";
             int tipo = notificacao.getTipo();
             int id = notificacao.getId();
