@@ -15,6 +15,7 @@ import com.gb.trabalho.DAO.MetaDAO;
 import com.gb.trabalho.Domain.Meta;
 import com.google.android.material.progressindicator.CircularProgressIndicator;
 
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -91,7 +92,8 @@ public class VisualizaMetasActivity extends BaseActivity {
 
     private void preencherCampos(TextView titulo, TextView valor, TextView deadline, TextView diasRestantes, TextView progressoTexto, CircularProgressIndicator progresso) {
         titulo.setText(meta.getDescricao());
-        valor.setText(getString(R.string.formatted_value, String.format(Locale.getDefault(), "%.2f", meta.getValor())));
+        NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
+        valor.setText(nf.format(meta.getValor()));
 
         String dataInicio = meta.getDataInicio();
         int prazo = meta.getPrazo();
@@ -117,7 +119,7 @@ public class VisualizaMetasActivity extends BaseActivity {
             if (dias >= 0) {
                 diasRestantes.setText(getString(R.string.days_remaining_format, dias));
             } else {
-                diasRestantes.setText(R.string.expired_deadline);
+                diasRestantes.setText(getString(R.string.expired_days_format, Math.abs(dias)));
             }
         } else {
             deadline.setText(R.string.data_indefinida);

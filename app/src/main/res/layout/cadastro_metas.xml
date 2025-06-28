@@ -38,14 +38,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:hint="@string/txt_value_hint">
+                android:hint="@string/txt_value_hint"
+                app:helperText="Ex: 1000.00"
+                app:helperTextTextColor="@color/material_dynamic_neutral_variant50">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edt_value"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="numberDecimal"
-                    android:hint="Ex: 1000.00" />
+                    android:inputType="numberDecimal" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -53,7 +54,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:hint="@string/txt_start_date_hint">
+                android:hint="@string/txt_start_date_hint"
+                app:helperText="Ex: 30/12/2025"
+                app:helperTextTextColor="@color/material_dynamic_neutral_variant50">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edt_start_date"
@@ -67,7 +70,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:hint="@string/txt_deadline_hint">
+                android:hint="@string/txt_deadline_hint"
+                app:helperText="Ex: 10"
+                app:helperTextTextColor="@color/material_dynamic_neutral_variant50">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edt_deadline"
@@ -112,12 +117,26 @@
                 android:id="@+id/btn_save"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="32dp"
+                android:layout_marginHorizontal="32dp"
+                android:layout_marginTop="32dp"
                 android:backgroundTint="@color/material_dynamic_neutral70"
                 android:fontFamily="sans-serif-medium"
                 android:text="@string/btn_save"
                 android:textAllCaps="true"
                 android:textColor="@android:color/black" />
+
+            <Button
+                android:id="@+id/btn_delete"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="32dp"
+                android:layout_marginTop="16dp"
+                android:backgroundTint="@color/material_dynamic_neutral70"
+                android:fontFamily="sans-serif-medium"
+                android:text="@string/btn_delete"
+                android:textAllCaps="true"
+                android:textColor="@android:color/black"
+                android:visibility="gone" />
 
         </LinearLayout>
 

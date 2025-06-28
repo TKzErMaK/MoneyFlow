@@ -99,4 +99,8 @@
         <item name="android:textSize">14sp</item>
     </style>
 
+    <style name="WhiteAlertDialog" parent="ThemeOverlay.Material3.MaterialAlertDialog">
+        <item name="background">@color/white</item>
+    </style>
+
 </resources>

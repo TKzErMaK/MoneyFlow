@@ -4,8 +4,11 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Gravity;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -19,6 +22,7 @@ import com.gb.trabalho.Domain.Meta;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -27,6 +31,16 @@ public class ListaMetasActivity extends BaseActivity {
     private ActivityResultLauncher<Intent> cadastroMetaLauncher;
     private MetaDAO metaDAO;
 
+    private EditText edtSearch;
+    private List<Meta> listaCompleta;
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        carregarMetas();
+        edtSearch.setText("");
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +48,8 @@ public class ListaMetasActivity extends BaseActivity {
         setActivityContent(R.layout.lista_metas);
         TextView txtTitle = findViewById(R.id.txt_titulo);
         txtTitle.setText("Metas");
+
+        edtSearch = findViewById(R.id.edt_search_input);
 
         metaDAO = new MetaDAO(this);
 
@@ -53,17 +69,46 @@ public class ListaMetasActivity extends BaseActivity {
         });
 
         carregarMetas();
+
+        edtSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                filtrarMetas(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {}
+        });
+
     }
 
     private void carregarMetas() {
+        listaCompleta = metaDAO.listarTodos();
+        exibirMetas(listaCompleta);
+    }
+
+    private void exibirMetas(List<Meta> metas) {
         LinearLayout container = findViewById(R.id.goals_container);
         container.removeAllViews();
-
-        List<Meta> metas = metaDAO.listarTodos();
 
         for (Meta meta : metas) {
             adicionarCard(meta);
         }
+    }
+
+    private void filtrarMetas(String texto) {
+        List<Meta> metasFiltradas = new ArrayList<>();
+
+        for (Meta meta : listaCompleta) {
+            if (meta.getDescricao().toLowerCase().contains(texto.toLowerCase())) {
+                metasFiltradas.add(meta);
+            }
+        }
+
+        exibirMetas(metasFiltradas);
     }
 
     private void adicionarCard(Meta meta) {
@@ -114,11 +159,7 @@ public class ListaMetasActivity extends BaseActivity {
 
         card.setOnClickListener(v -> {
             Intent intent = new Intent(this, VisualizaMetasActivity.class);
-            intent.putExtra("descricao", meta.getDescricao());
-            intent.putExtra("valor", valorFormatado);
-            intent.putExtra("data", meta.getDataInicio());
-            intent.putExtra("prazo", meta.getPrazo());
-            intent.putExtra("isReceita", meta.getTipo() == 1);
+            intent.putExtra("id", meta.getId());
             startActivity(intent);
         });
 

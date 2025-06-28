@@ -40,6 +40,7 @@ public class CadastroMetasActivity extends BaseActivity {
         edtDeadline = findViewById(R.id.edt_deadline);
         radioGroup = findViewById(R.id.radio_group);
         Button btnSave = findViewById(R.id.btn_save);
+        Button btnDelete = findViewById(R.id.btn_delete);
 
         Intent intent = getIntent();
         if (intent != null) {
@@ -57,7 +58,13 @@ public class CadastroMetasActivity extends BaseActivity {
             radioGroup.check(isReceita ? R.id.rb_income : R.id.rb_expense);
 
             isEdit = metaId != -1;
+
+            if (isEdit) {
+                btnDelete.setVisibility(Button.VISIBLE);
+            }
         }
+
+        btnDelete.setOnClickListener(v -> confirmarExclusao());
 
         btnSave.setOnClickListener(view -> {
             if (validarCampos()) {
@@ -173,4 +180,28 @@ public class CadastroMetasActivity extends BaseActivity {
         setResult(Activity.RESULT_OK);
         finish();
     }
+
+    private void confirmarExclusao() {
+        new androidx.appcompat.app.AlertDialog.Builder(this)
+                .setTitle("Confirmar exclusão")
+                .setMessage("Tem certeza que deseja deletar esta meta?")
+                .setPositiveButton("Sim", (dialog, which) -> deletarMeta())
+                .setNegativeButton("Cancelar", null)
+                .show();
+    }
+
+    private void deletarMeta() {
+        if (metaId != -1) {
+            MetaDAO metaDAO = new MetaDAO(this);
+            int deletado = metaDAO.deletar(metaId);
+            if (deletado > 0) {
+                Toast.makeText(this, "Meta deletada com sucesso!", Toast.LENGTH_SHORT).show();
+                setResult(Activity.RESULT_OK);
+                finish();  // volta para a lista
+            } else {
+                Toast.makeText(this, "Erro ao deletar a meta.", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
 }

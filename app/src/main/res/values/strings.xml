@@ -41,5 +41,7 @@
     <string name="descricao_indefinida">Descrição não informada</string>
     <string name="txt_goal_created">Metas criadas</string>
     <string name="btn_excluir">EXCLUIR</string>
+    <string name="btn_delete">DELETAR</string>
+    <string name="expired_days_format">Expirou há %1$d dias</string>
 
 </resources>
