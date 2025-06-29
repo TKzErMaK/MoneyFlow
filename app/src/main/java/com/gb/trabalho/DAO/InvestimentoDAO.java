@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.gb.trabalho.Domain.Notificacao;
 import com.gb.trabalho.Helper.DatabaseHelper;
 import com.gb.trabalho.Domain.Investimento;
 
