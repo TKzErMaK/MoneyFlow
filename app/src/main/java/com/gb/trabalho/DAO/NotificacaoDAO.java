@@ -115,6 +115,37 @@ public class NotificacaoDAO {
         }
         return lista;
     }
+    public List<Notificacao> listarporFiltro(String texto) {
+        List<Notificacao> lista = new ArrayList<>();
+        Cursor cursor = null;
 
+        if (texto == null || texto.trim().isEmpty()) {
+            return lista;
+        }
+        try {
+            String selection = "descricao LIKE ?";
+            String[] selectionArgs = { "%" + texto + "%" };
+
+            cursor = db.query("notificacao", null, selection, selectionArgs, null, null, null);
+
+            while (cursor.moveToNext()) {
+                Notificacao n = new Notificacao();
+                n.setId(cursor.getInt(cursor.getColumnIndexOrThrow("id")));
+                n.setDescricao(cursor.getString(cursor.getColumnIndexOrThrow("descricao")));
+                n.setValor(cursor.getDouble(cursor.getColumnIndexOrThrow("valor")));
+                n.setPrazo(cursor.getInt(cursor.getColumnIndexOrThrow("prazo")));
+                n.setTipo(cursor.getInt(cursor.getColumnIndexOrThrow("tipo")));
+                try {
+                    n.setDataVencimento(dateFormat.parse(cursor.getString(cursor.getColumnIndexOrThrow("data_vencimento"))));
+                } catch (Exception e) {
+                    n.setDataVencimento(new Date());
+                }
+                lista.add(n);
+            }
+        } finally {
+            if (cursor != null) cursor.close();
+        }
+        return lista;
+    }
 
 }

@@ -139,12 +139,7 @@ public class CadastroMovimentacaoActivity extends BaseActivity {
                 Toast.makeText(this, "Erro ao salvar movimentação", Toast.LENGTH_SHORT).show();
             }
         }
-
         exibirNotificacao(mov);
-
-        /*Intent intent = new Intent(CadastroMovimentacaoActivity.this, ExtratoActivity.class);
-        startActivity(intent);
-        finish();*/
     }
 
     private void excluirMovimentacao() {

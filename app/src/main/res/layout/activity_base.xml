@@ -86,10 +86,34 @@
     </LinearLayout>
 
     <!-- Menu lateral -->
-    <com.google.android.material.navigation.NavigationView
-        android:id="@+id/navigation_view"
+    <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_gravity="start"
-        app:menu="@menu/menu_lateral" />
+        android:layout_gravity="start">
+
+        <com.google.android.material.navigation.NavigationView
+            android:id="@+id/navigation_view_esquerda"
+            android:layout_width="wrap_content"
+            android:layout_height="500dp"
+            android:layout_gravity="top"
+            app:menu="@menu/menu_lateral"
+            android:background="@android:color/white"
+            android:fitsSystemWindows="true"/>
+    </FrameLayout>
+
+    <!-- Menu do usuário -->
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="end">
+
+        <com.google.android.material.navigation.NavigationView
+            android:id="@+id/navigation_view_direita"
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+        android:layout_gravity="top"
+        app:menu="@menu/menu_usuario"
+        android:background="@android:color/white"
+        android:fitsSystemWindows="true"/>
+    </FrameLayout>
 </androidx.drawerlayout.widget.DrawerLayout>

@@ -72,7 +72,7 @@ public class ExtratoActivity extends BaseActivity {
         List<Movimentacao> movimentacoes = movimentacaoDAO.listarPorMes(mes, ano);
         itens.clear();
         for (Movimentacao movimentacao : movimentacoes) {
-            String valor = "R$ " + movimentacao.getValor();
+            String valor = String.valueOf(movimentacao.getValor());
             String descricao = movimentacao.getDescricao();
             Date data = movimentacao.getData();
             String dataString = (data != null) ? this.dataString.format(data) : "";

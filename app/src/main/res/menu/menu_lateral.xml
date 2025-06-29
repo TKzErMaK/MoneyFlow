@@ -35,5 +35,9 @@
     <item
         android:id="@+id/nav_ListaNotificacoes"
         android:title="Lista de Notificações" />
+
+    <item
+        android:id="@+id/nav_Sair"
+        android:title="Sair" />
 </menu>
 

@@ -11,6 +11,7 @@ import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import com.gb.trabalho.DAO.MetaDAO;
 import com.gb.trabalho.Domain.Meta;
+import com.gb.trabalho.Helper.FormatacaoDataHelper;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.text.NumberFormat;
@@ -37,6 +38,7 @@ public class CadastroMetasActivity extends BaseActivity {
         edtDescription = findViewById(R.id.edt_description);
         edtValue = findViewById(R.id.edt_value);
         edtStartDate = findViewById(R.id.edt_start_date);
+        edtStartDate.addTextChangedListener(new FormatacaoDataHelper(edtStartDate));
         edtDeadline = findViewById(R.id.edt_deadline);
         radioGroup = findViewById(R.id.radio_group);
         Button btnSave = findViewById(R.id.btn_save);
