@@ -1,6 +1,7 @@
 package com.gb.trabalho.Helper;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -49,7 +50,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "valor REAL, " +
                 "prazo INTEGER, " +
                 "tipo INTEGER, " +
-                "dataInicio TEXT)";
+                "data_vencimento TEXT)";
 
         db.execSQL(createMovimentacao);
         db.execSQL(createInvestimento);
@@ -64,5 +65,30 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABELA_META);
         db.execSQL("DROP TABLE IF EXISTS " + TABELA_NOTIFICACAO);
         onCreate(db);
+    }
+
+    public static String getString(Cursor cursor, String columnName) {
+        int index = cursor.getColumnIndex(columnName);
+        return cursor.isNull(index) ? "" : cursor.getString(index);
+    }
+
+    public static int getInt(Cursor cursor, String columnName) {
+        int index = cursor.getColumnIndex(columnName);
+        return cursor.isNull(index) ? 0 : cursor.getInt(index);
+    }
+
+    public static double getDouble(Cursor cursor, String columnName) {
+        int index = cursor.getColumnIndex(columnName);
+        return cursor.isNull(index) ? 0.0 : cursor.getDouble(index);
+    }
+
+    public static long getLong(Cursor cursor, String columnName) {
+        int index = cursor.getColumnIndex(columnName);
+        return cursor.isNull(index) ? 0L : cursor.getLong(index);
+    }
+
+    public static float getFloat(Cursor cursor, String columnName) {
+        int index = cursor.getColumnIndex(columnName);
+        return cursor.isNull(index) ? 0f : cursor.getFloat(index);
     }
 }

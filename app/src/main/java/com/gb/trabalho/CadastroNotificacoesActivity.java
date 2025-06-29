@@ -98,7 +98,7 @@ public class CadastroNotificacoesActivity extends BaseActivity {
         notificacao.setValor(valor);
         notificacao.setPrazo(prazo);
         notificacao.setTipo(tipo);
-        notificacao.setDataInicio(DefineData(prazo));
+        notificacao.setDataVencimento(DefineData(prazo));
         notificacao.setId(id);
 
         NotificacaoDAO dao = new NotificacaoDAO(this);

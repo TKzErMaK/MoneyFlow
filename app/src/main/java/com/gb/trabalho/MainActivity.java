@@ -1,27 +1,25 @@
 package com.gb.trabalho;
 
+import static android.app.ProgressDialog.show;
+
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.icu.util.Calendar;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.gb.trabalho.Adapter.InvestimentoAdapter;
 import com.gb.trabalho.DAO.InvestimentoDAO;
 import com.gb.trabalho.DAO.MovimentacaoDAO;
 import com.gb.trabalho.DAO.NotificacaoDAO;
 import com.gb.trabalho.Domain.Investimento;
-import com.gb.trabalho.Domain.Movimentacao;
 import com.gb.trabalho.Domain.Notificacao;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.PieData;
@@ -31,8 +29,6 @@ import com.github.mikephil.charting.data.PieEntry;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -48,6 +44,7 @@ public class MainActivity extends BaseActivity {
     MovimentacaoDAO movimentacaoDAO;
     NotificacaoDAO notificacaoDAO;
     InvestimentoAdapter investimentoAdapter;
+    SimpleDateFormat dataString = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -166,38 +163,34 @@ public class MainActivity extends BaseActivity {
     }
 
     private void exibirNotificacao() {
-
         NotificacaoDAO notificacaodao = new NotificacaoDAO(this);
-        List<Notificacao> notificacoes = new ArrayList<>();
-        notificacoes = notificacaodao.listarTodos();
+        List<Notificacao> notificacoes = notificacaodao.listarTodos();
+        Date hoje = new Date();
+        Date dataVencimento;
 
         for (Notificacao notificacao : notificacoes) {
+            if (notificacao.getTipo() == 0 && notificacao.getDataVencimento() != null) {
+                dataVencimento = notificacao.getDataVencimento();
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+                String hojeFormatado = sdf.format(hoje);
+                String vencimentoFormatado = sdf.format(dataVencimento);
 
-            //notificação por prazo
-            if (notificacao.getTipo() == 0) {
-                try {
-                    SimpleDateFormat dataString = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
-                    Date dataInicio = dataString.parse(notificacao.getDataInicio().toString());
-
-                    Calendar calendar = Calendar.getInstance();
-                    calendar.setTime(dataInicio);
-                    calendar.add(Calendar.DAY_OF_MONTH, notificacao.getPrazo());
-                    Date dataVencimento = calendar.getTime();
-
-                    Calendar hoje = Calendar.getInstance();
-
-                    if (dataString.format(dataVencimento).equals(dataString.format(hoje.getTime()))) {
-                        new AlertDialog.Builder(this)
-                                .setTitle("Notificação")
-                                .setMessage(notificacao.getDescricao())
-                                .setPositiveButton("OK", null)
-                                .show();
-                    }
-                } catch (ParseException e) {
-                    e.printStackTrace();
+                if (hojeFormatado.equals(vencimentoFormatado)) {
+                    mostrarDialogoNotificacao(notificacao.getDescricao());
+                    return;
                 }
             }
-
         }
+    }
+
+    private void mostrarDialogoNotificacao(String mensagem) {
+        new AlertDialog.Builder(this)
+                .setTitle("Notificação")
+                .setMessage(mensagem)
+                .setCancelable(false)
+                .setPositiveButton("OK", (dialog, which) -> {
+                    dialog.dismiss();
+                })
+                .show();
     }
 }

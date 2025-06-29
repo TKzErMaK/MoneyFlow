@@ -14,9 +14,12 @@ import com.gb.trabalho.DAO.NotificacaoDAO;
 import com.gb.trabalho.Domain.Notificacao;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class ListaNotificacoesActivity extends BaseActivity {
     FloatingActionButton btnadicionar;
@@ -38,17 +41,16 @@ public class ListaNotificacoesActivity extends BaseActivity {
         List<Notificacao> notificacoes = notificacaoDAO.listarTodos();
 
         List<ItemLista> itens = new ArrayList<>();
-        for (Notificacao notificacao : notificacoes) {
-            String valor = String.valueOf("R$ " + notificacao.getValor());
-            String descricao = notificacao.getDescricao();
-            Date data = notificacao.getDataInicio();
-            String dataString = (data != null) ? data.toString() : "";
-            int tipo = notificacao.getTipo();
-            int id = notificacao.getId();
-            int prazo = notificacao.getPrazo();
 
-            itens.add(new ItemLista(valor, descricao, dataString, tipo, id, prazo));
-        }
+            for (Notificacao notificacao : notificacoes) {
+                String valor = String.valueOf("R$ " + notificacao.getValor());
+                String descricao = notificacao.getDescricao();
+                int tipo = notificacao.getTipo();
+                int id = notificacao.getId();
+                int prazo = notificacao.getPrazo();
+
+                itens.add(new ItemLista(valor, descricao,"", tipo, id, prazo));
+            }
 
         ItemListaAdapter adapter = new ItemListaAdapter(this, itens, item -> {
             Intent intent = new Intent(this, CadastroNotificacoesActivity.class);
@@ -56,8 +58,8 @@ public class ListaNotificacoesActivity extends BaseActivity {
             intent.putExtra("descricao", item.getDescricao());
             intent.putExtra("data", item.getData());
             intent.putExtra("tipo", item.getTipo());
-            intent.putExtra("id",item.getId());
-            intent.putExtra("prazo",item.getPrazo());
+            intent.putExtra("id", item.getId());
+            intent.putExtra("prazo", item.getPrazo());
             startActivity(intent);
         });
 

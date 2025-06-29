@@ -142,9 +142,9 @@ public class CadastroMovimentacaoActivity extends BaseActivity {
 
         exibirNotificacao(mov);
 
-        Intent intent = new Intent(CadastroMovimentacaoActivity.this, ExtratoActivity.class);
+        /*Intent intent = new Intent(CadastroMovimentacaoActivity.this, ExtratoActivity.class);
         startActivity(intent);
-        finish();
+        finish();*/
     }
 
     private void excluirMovimentacao() {
@@ -173,23 +173,35 @@ public class CadastroMovimentacaoActivity extends BaseActivity {
         double totalDespesas = 0;
         double totalReceitas = 0;
         NotificacaoDAO notificacaodao = new NotificacaoDAO(this);
-        List<Notificacao> notificacoes = new ArrayList<>();
-        notificacoes = notificacaodao.listarTodos();
+        List<Notificacao> notificacoes = notificacaodao.listarTodos();
 
         for (Notificacao notificacao : notificacoes) {
-
-            //notificação por valor
             if (notificacao.getTipo() == 1) {
-                totalReceitas = movimentacaodao.buscarReceitaPeriodo(notificacao.getDataInicio().toString());
-                totalDespesas = movimentacaodao.buscarDespesaPeriodo(notificacao.getDataInicio().toString());
-            }
-            if (totalReceitas >= notificacao.getValor() || totalDespesas >= notificacao.getValor()) {
-                new AlertDialog.Builder(this)
-                        .setTitle("Notificação")
-                        .setMessage(notificacao.getDescricao())
-                        .setPositiveButton("OK", null)
-                        .show();
+
+                String dataVencStr = notificacao.getDataVencimento() != null ? notificacao.getDataVencimento().toString() : "";
+                totalReceitas = movimentacaodao.buscarReceitaPeriodo(dataVencStr);
+                totalDespesas = movimentacaodao.buscarDespesaPeriodo(dataVencStr);
+
+                if (totalReceitas >= notificacao.getValor() || totalDespesas >= notificacao.getValor()) {
+                    mostrarDialogoNotificacao(notificacao.getDescricao());
+                    return;
+                }
             }
         }
+        navegarParaExtrato();
+    }
+
+    private void mostrarDialogoNotificacao(String mensagem) {
+        new AlertDialog.Builder(this)
+                .setTitle("Notificação")
+                .setMessage(mensagem)
+                .setCancelable(false)
+                .setPositiveButton("OK", (dialog, which) -> navegarParaExtrato())
+                .show();
+    }
+    private void navegarParaExtrato() {
+        Intent intent = new Intent(CadastroMovimentacaoActivity.this, ExtratoActivity.class);
+        startActivity(intent);
+        finish();
     }
 }
