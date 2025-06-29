@@ -43,5 +43,16 @@
     <string name="btn_excluir">EXCLUIR</string>
     <string name="btn_delete">DELETAR</string>
     <string name="expired_days_format">Expirou há %1$d dias</string>
+    <string name="meta_expirada">Meta expirada</string>
+    <string name="erro_calculo_progresso">Erro no cálculo do progresso</string>
+    <string name="txt_accumulated_value_example">Total acumulado: R$ 0,00</string>
+    <string name="accumulated_value_format">Total acumulado: %s</string>
+    <string name="txt_remaining_value_example">Restante necessário: R$ 0,00</string>
+    <string name="remaining_value_format">Restante necessário: %s</string>
+    <string name="txt_status">Status da Meta</string>
+    <string name="txt_achieved_goal">Meta Atingida 🎉</string>
+    <string name="txt_expired_goal">Meta Expirada ⌛</string>
+    <string name="no_progress_due_to_expiration">Prazo encerrado, sem progresso registrado</string>
+
 
 </resources>

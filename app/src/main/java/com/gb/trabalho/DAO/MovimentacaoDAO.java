@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
 public class MovimentacaoDAO {
     private SQLiteDatabase db;
@@ -80,6 +81,43 @@ public class MovimentacaoDAO {
         return receita;
     }
 
+    public double buscarReceitaPeriodoComPrazo(String dataInicial, String dataFinal) {
+        double receita = 0.0;
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+
+        try {
+            Date dataIni = sdf.parse(dataInicial);
+            Date dataFim = sdf.parse(dataFinal);
+            Date hoje = new Date();
+
+            if (dataIni == null || dataFim == null) return 0.0;
+
+            // Garante que data final não passe de hoje
+            if (dataFim.after(hoje)) {
+                dataFim = hoje;
+            }
+
+            Cursor cursor = db.rawQuery("SELECT valor, data FROM movimentacao WHERE tipo = 1", null);
+
+            while (cursor.moveToNext()) {
+                double valor = cursor.getDouble(0);
+                String dataStr = cursor.getString(1);
+
+                Date dataMov = sdf.parse(dataStr);
+                if (dataMov != null && !dataMov.before(dataIni) && !dataMov.after(dataFim)) {
+                    receita += valor;
+                }
+            }
+
+            cursor.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return receita;
+    }
+
     public double buscarDespesaPeriodo(String dataInicial) {
         double despesa = 0.0;
         String dataAtual = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(new Date());
@@ -93,6 +131,42 @@ public class MovimentacaoDAO {
             despesa = cursor.isNull(0) ? 0.0 : cursor.getDouble(0);
         }
         cursor.close();
+        return despesa;
+    }
+
+    public double buscarDespesaPeriodoComPrazo(String dataInicial, String dataFinal) {
+        double despesa = 0.0;
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+
+        try {
+            Date dataIni = sdf.parse(dataInicial);
+            Date dataFim = sdf.parse(dataFinal);
+            Date hoje = new Date();
+
+            if (dataIni == null || dataFim == null) return 0.0;
+
+            if (dataFim.after(hoje)) {
+                dataFim = hoje;
+            }
+
+            Cursor cursor = db.rawQuery("SELECT valor, data FROM movimentacao WHERE tipo = 0", null);
+
+            while (cursor.moveToNext()) {
+                double valor = cursor.getDouble(0);
+                String dataStr = cursor.getString(1);
+
+                Date dataMov = sdf.parse(dataStr);
+                if (dataMov != null && !dataMov.before(dataIni) && !dataMov.after(dataFim)) {
+                    despesa += valor;
+                }
+            }
+
+            cursor.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         return despesa;
     }
 

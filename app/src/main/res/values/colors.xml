@@ -30,4 +30,9 @@
     <color name="color_18">#009688</color>
     <color name="color_19">#9E9E9E</color>
     <color name="color_20">#000000</color>
+    <color name="green">#388E3C</color>
+    <color name="light_green">#C8E6C9</color>
+    <color name="red">#D32F2F</color>
+    <color name="light_red">#FFCDD2</color>
+    <color name="gray">#BDBDBD</color>
 </resources>

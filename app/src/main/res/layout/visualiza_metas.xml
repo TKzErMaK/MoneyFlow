@@ -35,19 +35,49 @@
                 android:layout_height="150dp"
                 android:layout_marginTop="16dp"
                 android:indeterminate="false"
-                app:indicatorColor="@color/material_dynamic_primary70"
+                app:indicatorColor="@color/color_17"
                 app:indicatorInset="16dp"
                 app:indicatorSize="128dp"
-                app:trackColor="@color/material_dynamic_tertiary70"
+                app:trackColor="@color/color_1"
                 app:trackCornerRadius="16dp"
-                app:trackThickness="6dp" />
+                app:trackThickness="6dp"
+                android:max="100" />
 
             <TextView
                 android:id="@+id/txt_progress_value"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="2dp"
                 android:text="@string/txt_progress_value_example"
                 android:textSize="16sp"
                 style="@style/DefaultLabel" />
+
+            <TextView
+                android:id="@+id/txt_goal_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:background="@drawable/status_background"
+                android:padding="8dp"
+                android:visibility="gone"
+                android:text="@string/txt_status"/>
+
+
+            <TextView
+                android:id="@+id/txt_accumulated_value"
+                android:layout_marginTop="2dp"
+                android:textSize="16sp"
+                style="@style/DefaultLabel"
+                android:text="@string/txt_accumulated_value_example" />
+
+            <TextView
+                android:id="@+id/txt_remaining_value"
+                android:layout_marginTop="2dp"
+                android:textSize="16sp"
+                style="@style/DefaultLabel"
+                android:text="@string/txt_remaining_value_example" />
+
 
             <LinearLayout
                 android:layout_width="match_parent"
