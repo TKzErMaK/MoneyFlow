@@ -4,7 +4,27 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="32dp"
-    android:gravity="center">
+    android:paddingTop="64dp"
+    android:gravity="center_horizontal">
+
+    <ImageView
+        android:id="@+id/logoImageView"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/moneyflow"
+        android:contentDescription="Logo do app"
+        android:layout_marginTop="80dp"/>
+
+    <TextView
+        android:id="@+id/appTitleTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Money Flow"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        android:layout_marginTop="8dp"
+        android:gravity="center" />
 
     <EditText
         android:id="@+id/emailEditText"
@@ -12,7 +32,8 @@
         android:layout_height="wrap_content"
         android:hint="Email"
         android:inputType="textEmailAddress"
-        android:padding="16dp"/>
+        android:padding="16dp"
+        android:layout_marginTop="32dp" />
 
     <EditText
         android:id="@+id/passwordEditText"
@@ -21,13 +42,13 @@
         android:hint="Senha"
         android:inputType="textPassword"
         android:padding="16dp"
-        android:layout_marginTop="16dp"/>
+        android:layout_marginTop="16dp" />
 
     <Button
         android:id="@+id/loginButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Login"
-        android:layout_marginTop="32dp"/>
+        android:layout_marginTop="32dp"
+        android:text="Login" />
 
 </LinearLayout>
