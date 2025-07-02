@@ -1,20 +1,15 @@
 package com.gb.trabalho;
 
-import static android.app.ProgressDialog.show;
 
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Color;
-import android.icu.util.Calendar;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
 import androidx.activity.EdgeToEdge;
 import androidx.core.content.ContextCompat;
-
 import com.gb.trabalho.Adapter.InvestimentoAdapter;
 import com.gb.trabalho.DAO.InvestimentoDAO;
 import com.gb.trabalho.DAO.MovimentacaoDAO;
@@ -25,9 +20,7 @@ import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
-
 import java.text.NumberFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -36,7 +29,7 @@ import java.util.Locale;
 
 public class MainActivity extends BaseActivity {
 
-    Button btnmovimentacao, btnextrato, btninvestimentos, btnnotificacoes, btnmetas;
+    Button btnmovimentacao, btnindicadores, btnextrato, btninvestimentos, btnnotificacoes, btnmetas;
     Intent intent;
     TextView txtinvestimentos, txtsaldo;
     double totalInvestimentos = 0, saldo = 0;
@@ -69,6 +62,15 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 intent = new Intent(MainActivity.this, CadastroMovimentacaoActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        btnindicadores = findViewById(R.id.btn_indicadores);
+        btnindicadores.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                intent = new Intent(MainActivity.this, IndicadoresActivity.class);
                 startActivity(intent);
             }
         });
