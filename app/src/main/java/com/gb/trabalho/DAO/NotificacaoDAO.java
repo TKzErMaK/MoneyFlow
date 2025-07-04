@@ -37,21 +37,6 @@ public class NotificacaoDAO {
         values.put("prazo", notificacao.getPrazo());
         values.put("tipo", notificacao.getTipo());
         values.put("data_vencimento", dateFormat.format(notificacao.getDataVencimento()));
-        /*String dataVencimentoStr = notificacao.getDataVencimento();
-
-        if (dataVencimentoStr != null && !dataVencimentoStr.isEmpty()) {
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
-            try {
-                Date date = sdf.parse(dataVencimentoStr);
-                String dataFormatada = sdf.format(date);
-                values.put("data_vencimento", dataFormatada);
-            } catch (ParseException e) {
-                e.printStackTrace();
-                values.putNull("data_vencimento");
-            }
-        } else {
-            values.putNull("data_vencimento");
-        }*/
         return db.insert("notificacao", null, values);
     }
 

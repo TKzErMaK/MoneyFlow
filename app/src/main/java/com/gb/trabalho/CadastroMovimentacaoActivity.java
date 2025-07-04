@@ -87,10 +87,11 @@ public class CadastroMovimentacaoActivity extends BaseActivity {
     }
 
     private void salvarMovimentacao() {
-        String valorStr = edtValor.getText().toString();
         String descricao = edtDescricao.getText().toString();
         String dataStr = edtData.getText().toString();
         Date data;
+        double valor = Double.parseDouble(edtValor.getText().toString());
+        int tipo = rbReceita.isChecked() ? 1 : 0;
 
         try {
             SimpleDateFormat dataString = new SimpleDateFormat("dd/MM/yyyy");
@@ -100,9 +101,6 @@ public class CadastroMovimentacaoActivity extends BaseActivity {
             Toast.makeText(this, "Data inválida", Toast.LENGTH_SHORT).show();
             return;
         }
-
-        double valor = valorStr.isEmpty() ? 0.0 : converteValor(valorStr);
-        int tipo = rbReceita.isChecked() ? 1 : 0;
 
         if (descricao.isEmpty()) {
             Toast.makeText(this, "Descrição não informada", Toast.LENGTH_SHORT).show();
@@ -154,14 +152,6 @@ public class CadastroMovimentacaoActivity extends BaseActivity {
         Intent intent = new Intent(CadastroMovimentacaoActivity.this, ExtratoActivity.class);
         startActivity(intent);
         finish();
-    }
-
-    private double converteValor(String valorStr) {
-        try {
-            return Double.parseDouble(valorStr);
-        } catch (NumberFormatException e) {
-            return 0.0;
-        }
     }
 
     private void exibirNotificacao(Movimentacao mov) {

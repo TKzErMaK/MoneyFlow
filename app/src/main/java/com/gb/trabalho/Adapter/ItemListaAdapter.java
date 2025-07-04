@@ -43,7 +43,7 @@ public class ItemListaAdapter extends RecyclerView.Adapter<ItemListaAdapter.View
         }
 
         public void bind(ItemLista item, OnItemClickListener listener) {
-            txtValor.setText(item.getValor());
+            txtValor.setText(String.valueOf(item.getValor()));
             txtDescricao.setText(item.getDescricao());
             txtData.setText(item.getData());
             int tipo = item.getTipo(); // 0=despesa 1=receita

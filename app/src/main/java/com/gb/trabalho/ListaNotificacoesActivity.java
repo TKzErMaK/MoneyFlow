@@ -79,13 +79,13 @@ public class ListaNotificacoesActivity extends BaseActivity {
         itens = new ArrayList<>();
 
         for (Notificacao notificacao : notificacoes) {
-            String valor = String.valueOf("R$ " + notificacao.getValor());
+            double valor = notificacao.getValor();
             String descricao = notificacao.getDescricao();
             int tipo = notificacao.getTipo();
             int id = notificacao.getId();
             int prazo = notificacao.getPrazo();
 
-            itens.add(new ItemLista(valor, descricao, "", tipo, id, prazo));
+            itens.add(new ItemLista(valor, descricao, "", tipo, id, prazo,0));
         }
 
         ItemListaAdapter adapter = new ItemListaAdapter(this, itens, item -> {

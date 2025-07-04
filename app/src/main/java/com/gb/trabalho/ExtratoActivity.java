@@ -72,13 +72,13 @@ public class ExtratoActivity extends BaseActivity {
         List<Movimentacao> movimentacoes = movimentacaoDAO.listarPorMes(mes, ano);
         itens.clear();
         for (Movimentacao movimentacao : movimentacoes) {
-            String valor = String.valueOf(movimentacao.getValor());
+            double valor = movimentacao.getValor();
             String descricao = movimentacao.getDescricao();
             Date data = movimentacao.getData();
             String dataString = (data != null) ? this.dataString.format(data) : "";
             int tipo = movimentacao.getTipo();
             int id = movimentacao.getId();
-            itens.add(new ItemLista(valor, descricao, dataString, tipo, id, 0));
+            itens.add(new ItemLista(valor, descricao, dataString, tipo, id, 0,0));
         }
 
         adapter = new ItemListaAdapter(this, itens, item -> {

@@ -11,54 +11,166 @@ import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 
 import com.gb.trabalho.DAO.InvestimentoDAO;
+import com.gb.trabalho.DAO.NotificacaoDAO;
 import com.gb.trabalho.Domain.Investimento;
+import com.gb.trabalho.Domain.Notificacao;
+import com.gb.trabalho.Helper.FormatacaoDataHelper;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class CadastroInvestimentoActivity extends BaseActivity {
 
-    EditText edtDescricao;
-    EditText edtValor;
-    EditText edtDataInicio;
-    EditText edtRentabilidade;
-    EditText edtFrequencia;
-    Button btnGravar;
-
-    private Investimento investimento;
-    private InvestimentoDAO investimentoDAO;
+    EditText edtDescricao, edtValor, edtDataInicio, edtRentabilidade, edtFrequencia;
+    Button btnSalvar, btnExcluir;
+    private int id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setActivityContent(R.layout.cadastro_investimentos);
+
         TextView txtTitle = findViewById(R.id.txt_titulo);
         txtTitle.setText("Investimento");
 
-        // Iniciar os campos de texto do layout
         edtDescricao = findViewById(R.id.txt_descricao);
         edtValor = findViewById(R.id.txt_valor);
-        edtDataInicio = findViewById(R.id.txt_data);
+        edtDataInicio = findViewById(R.id.txt_data_inicio);
+        edtDataInicio.addTextChangedListener(new FormatacaoDataHelper(edtDataInicio));
         edtRentabilidade = findViewById(R.id.txt_rentabilidade);
-        edtFrequencia = findViewById(R.id.txt_frequencia);
+        btnSalvar = findViewById(R.id.btn_gravar);
+        btnExcluir = findViewById(R.id.btn_deletar);
 
-        investimentoDAO = new InvestimentoDAO(this);
+        Intent intent = getIntent();
+        if (intent != null) {
+            id = intent.getIntExtra("id", 0);
+            double valor = intent.getDoubleExtra("valor", 0);
+            String descricao = intent.getStringExtra("descricao");
+            String datainicio = intent.getStringExtra("datainicio");
+            double percentualrentabilidade = intent.getDoubleExtra("percentualrentabilidade", 0);
+            if (valor == 0) {
+                edtValor.setText("");
+            } else {
+                edtValor.setText(String.valueOf(valor));
+            }
 
-        // Verifica se esta Activity foi iniciada para editar uma lista existente
-        long idInvestimento = getIntent().getLongExtra("id_investimento", -1);
-
-        if (idInvestimento != -1){
-
+            edtValor.setText(String.valueOf(valor));
+            edtDescricao.setText(descricao);
+            edtDataInicio.setText(datainicio);
+            edtRentabilidade.setText((String.valueOf(percentualrentabilidade)));
         }
 
-        // Iniciar o DAO para salvar os dados
-        btnGravar = findViewById(R.id.btn_gravar);
-        btnGravar.setOnClickListener(new View.OnClickListener() {
+        btnSalvar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SalvarInvestimento();
+                salvarInvestimento();
             }
         });
 
+        btnExcluir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                excluirInvestimento();
+            }
+        });
     }
+
+    private void salvarInvestimento() {
+        double valor = Double.parseDouble(edtValor.getText().toString());
+        String descricao = edtDescricao.getText().toString();
+        String dataStr = edtDataInicio.getText().toString();
+        Date data;
+        double percentualrentabilidade = Double.parseDouble(edtRentabilidade.getText().toString());
+
+        if (descricao.isEmpty()) {
+            Toast.makeText(this, "Descrição não informada", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (valor == 0) {
+            Toast.makeText(this, "Valor não informado", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (percentualrentabilidade == 0) {
+            Toast.makeText(this, "Rentabilidade não informada", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        try {
+            SimpleDateFormat dataString = new SimpleDateFormat("dd/MM/yyyy");
+            dataString.setLenient(false);
+            data = dataString.parse(dataStr);
+        } catch (ParseException e) {
+            Toast.makeText(this, "Data inválida", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        Investimento investimento = new Investimento();
+        investimento.setDescricao(descricao);
+        investimento.setValor(valor);
+        investimento.setDataInicio(data);
+        investimento.setId(id);
+        investimento.setPercentualRentabilidade(percentualrentabilidade);
+
+        InvestimentoDAO dao = new InvestimentoDAO(this);
+        long resultado;
+
+        if (id > 0) {
+            resultado = dao.alterar(investimento);
+            if (resultado > 0) {
+                Toast.makeText(this, "Investimento alterada com sucesso!", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "Erro ao alterar investimento", Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            resultado = dao.inserir(investimento);
+            if (resultado != -1) {
+                Toast.makeText(this, "Investimento salvo com sucesso!", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "Erro ao salvar investimento", Toast.LENGTH_SHORT).show();
+            }
+        }
+        Intent intent = new Intent(CadastroInvestimentoActivity.this, ListaInvestimentosActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    private void excluirInvestimento() {
+        if (id > 0) {
+            InvestimentoDAO dao = new InvestimentoDAO(this);
+            long resultado = dao.deletar(id);
+            if (resultado > 0) {
+                Toast.makeText(this, "Investimento excluído com sucesso!", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "Erro ao excluir investimento", Toast.LENGTH_SHORT).show();
+            }
+        }
+        Intent intent = new Intent(CadastroInvestimentoActivity.this, ListaInvestimentosActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     // Metodo para salvar os dados do investimento
     private void SalvarInvestimento() {

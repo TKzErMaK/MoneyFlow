@@ -1,30 +1,31 @@
 package com.gb.trabalho.Domain;
 
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Locale;
 
 public class Investimento {
 
-    private long id;
+    private int id;
     private String descricao;
     private double valor;
-    private String dataInicio;
+    private Date dataInicio;
     private double percentualRentabilidade;
     private String frequencia;;
 
     public Investimento() {
     }
 
-    public Investimento(String descricao, double valor, String dataInicio, double percentualRentabilidade, String frequencia) {
+    public Investimento(String descricao, double valor, Date dataInicio, double percentualRentabilidade, String frequencia) {
         this.descricao = descricao;
         this.valor = valor;
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
-        this.dataInicio = sdf.format(dataInicio);
+        this.dataInicio = dataInicio;
         this.percentualRentabilidade = percentualRentabilidade;
         this.frequencia = frequencia;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
     public void setId(int id) {
@@ -45,10 +46,10 @@ public class Investimento {
         this.valor = valor;
     }
 
-    public String getDataInicio() {
+    public Date getDataInicio() {
         return dataInicio;
     }
-    public void setDataInicio(String dataInicio) {
+    public void setDataInicio(Date dataInicio) {
         this.dataInicio = dataInicio;
     }
 
@@ -58,7 +59,6 @@ public class Investimento {
     public void setPercentualRentabilidade(double percentualRentabilidade) {
         this.percentualRentabilidade = percentualRentabilidade;
     }
-
     public String getFrequencia() {
         return frequencia;
     }

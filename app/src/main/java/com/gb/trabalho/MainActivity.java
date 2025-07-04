@@ -44,19 +44,13 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setActivityContent(R.layout.main);
-        CarregarGrafico();
-        CarregaSaldo();
+
         notificacaoDAO = new NotificacaoDAO(this);
         notificacaoDAO.deletarNotificacoesVencidas();
         exibirNotificacao();
 
         txtsaldo = findViewById(R.id.txt_saldo);
         txtinvestimentos = findViewById(R.id.txt_investimentos);
-        NumberFormat moeda = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
-
-        txtsaldo.setText(moeda.format(saldo));
-        txtinvestimentos.setText(moeda.format(totalInvestimentos));
-
         btnmovimentacao = findViewById(R.id.btn_movimentacao);
         btnmovimentacao.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,6 +106,16 @@ public class MainActivity extends BaseActivity {
         });
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        CarregarGrafico();
+        CarregaSaldo();
+        NumberFormat moeda = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
+        txtsaldo.setText(moeda.format(saldo));
+        txtinvestimentos.setText(moeda.format(totalInvestimentos));
+    }
+
     private void CarregaSaldo() {
         movimentacaoDAO = new MovimentacaoDAO(this);
         saldo = movimentacaoDAO.buscarSaldo();
@@ -127,12 +131,6 @@ public class MainActivity extends BaseActivity {
 
         PieChart pieChart = findViewById(R.id.pieChart);
         List<PieEntry> entries = investimentoAdapter.converterParaPieEntries(investimentos);
-
-        /*entries.add(new PieEntry(81596.00f, "CDB"));
-        entries.add(new PieEntry(31256.00f, "Ações"));
-        entries.add(new PieEntry(253416.00f, "Imóveis"));
-        entries.add(new PieEntry(5527.00f, "Espécie"));*/
-
         for (PieEntry entry : entries) {
             totalInvestimentos += entry.getValue();
         }

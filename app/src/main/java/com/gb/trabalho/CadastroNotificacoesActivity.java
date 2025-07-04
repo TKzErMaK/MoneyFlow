@@ -75,11 +75,9 @@ public class CadastroNotificacoesActivity extends BaseActivity {
     }
 
     private void salvarNotificacao() {
-        String valorStr = edtValor.getText().toString();
         String descricao = edtDescricao.getText().toString();
         String prazoStr = edtPrazo.getText().toString();
-
-        double valor = valorStr.isEmpty() ? 0.0 : converteValor(valorStr);
+        double valor = Double.parseDouble(edtValor.getText().toString());
         int prazo = prazoStr.isEmpty() ? 0 : Integer.parseInt(prazoStr);
         int tipo = rbValor.isChecked() ? 1 : 0;
 
@@ -147,11 +145,4 @@ public class CadastroNotificacoesActivity extends BaseActivity {
         return calendar.getTime();
     }
 
-    private double converteValor(String valorStr) {
-        try {
-            return Double.parseDouble(valorStr);
-        } catch (NumberFormatException e) {
-            return 0.0;
-        }
-    }
 }
