@@ -12,7 +12,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.gb.trabalho.Domain.ItemLista;
 import com.gb.trabalho.R;
 
+import java.text.NumberFormat;
 import java.util.List;
+import java.util.Locale;
 
 public class ItemListaAdapter extends RecyclerView.Adapter<ItemListaAdapter.ViewHolder> {
     private List<ItemLista> itemList;
@@ -43,9 +45,17 @@ public class ItemListaAdapter extends RecyclerView.Adapter<ItemListaAdapter.View
         }
 
         public void bind(ItemLista item, OnItemClickListener listener) {
-            txtValor.setText(String.valueOf(item.getValor()));
+            NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
+            txtValor.setText(nf.format(item.getValor()));
             txtDescricao.setText(item.getDescricao());
             txtData.setText(item.getData());
+
+            //Para listagem de notificação com tipo tempo
+            try{
+                if (item.getPrazo() >= 0 && item.getTipo() == 0)
+                    txtValor.setText(String.valueOf(item.getPrazo()));
+            } catch (Exception ignored) {};
+
             int tipo = item.getTipo(); // 0=despesa 1=receita
             if (tipo == 1) {
                 cardView.setCardBackgroundColor(ContextCompat.getColor(cardView.getContext(), R.color.receita));

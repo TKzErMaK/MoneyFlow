@@ -88,11 +88,13 @@ public class CadastroNotificacoesActivity extends BaseActivity {
 
         if (tipo == 1 && valor == 0) {
             Toast.makeText(this, "Informe o valor", Toast.LENGTH_SHORT).show();
+            edtValor.requestFocus();
             return;
         }
 
         if (tipo == 0 && prazo == 0) {
             Toast.makeText(this, "Informeo prazo", Toast.LENGTH_SHORT).show();
+            edtPrazo.requestFocus();
             return;
         }
 
