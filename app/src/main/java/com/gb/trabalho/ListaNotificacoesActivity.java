@@ -17,12 +17,8 @@ import com.gb.trabalho.DAO.NotificacaoDAO;
 import com.gb.trabalho.Domain.Notificacao;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 public class ListaNotificacoesActivity extends BaseActivity {
     FloatingActionButton btnadicionar;
@@ -37,6 +33,7 @@ public class ListaNotificacoesActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setActivityContent(R.layout.lista_notificacoes);
+
         edtSearchInput = findViewById(R.id.edt_search_input);
         TextView txtTitle = findViewById(R.id.txt_titulo);
         txtTitle.setText("Notificações");

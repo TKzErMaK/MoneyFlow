@@ -42,13 +42,13 @@ public class CadastroNotificacoesActivity extends BaseActivity {
 
         Intent intent = getIntent();
         if (intent != null) {
-            String valor = intent.getStringExtra("valor");
+            double valor = intent.getDoubleExtra("valor", 0);
             String descricao = intent.getStringExtra("descricao");
             int prazo = intent.getIntExtra("prazo", 0);
             int tipo = intent.getIntExtra("tipo", 0);
             id = intent.getIntExtra("id", 0);
 
-            edtValor.setText(valor);
+            edtValor.setText(String.valueOf(valor));
             edtDescricao.setText(descricao);
             edtPrazo.setText(String.valueOf(prazo));
 
@@ -86,8 +86,13 @@ public class CadastroNotificacoesActivity extends BaseActivity {
             return;
         }
 
-        if (valor == 0 && prazo == 0) {
-            Toast.makeText(this, "Informe o valor ou o prazo", Toast.LENGTH_SHORT).show();
+        if (tipo == 1 && valor == 0) {
+            Toast.makeText(this, "Informe o valor", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (tipo == 0 && prazo == 0) {
+            Toast.makeText(this, "Informeo prazo", Toast.LENGTH_SHORT).show();
             return;
         }
 
