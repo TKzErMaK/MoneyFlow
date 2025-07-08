@@ -6,17 +6,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import androidx.activity.EdgeToEdge;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.gb.trabalho.Adapter.ItemListaAdapter;
 import com.gb.trabalho.DAO.MovimentacaoDAO;
 import com.gb.trabalho.Domain.ItemLista;
 import com.gb.trabalho.Domain.Movimentacao;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -49,9 +46,6 @@ public class ExtratoActivity extends BaseActivity {
         movimentacaoDAO = new MovimentacaoDAO(this);
         anoAtual = Calendar.getInstance().get(Calendar.YEAR);
 
-        int mesAtual = Calendar.getInstance().get(Calendar.MONTH) + 1;
-        carregarMovimentacoesPorMes(mesAtual, anoAtual);
-
         LinearLayout monthContainer = findViewById(R.id.month_container);
         for (int i = 0; i < monthContainer.getChildCount(); i++) {
             View v = monthContainer.getChildAt(i);
@@ -66,6 +60,12 @@ public class ExtratoActivity extends BaseActivity {
             intent = new Intent(ExtratoActivity.this, CadastroMovimentacaoActivity.class);
             startActivity(intent);
         });
+
+        int mesAtual = Calendar.getInstance().get(Calendar.MONTH);
+        View botaoMesAtual = monthContainer.getChildAt(mesAtual);
+        if (botaoMesAtual instanceof Button) {
+            botaoMesAtual.performClick();
+        }
     }
 
     private void carregarMovimentacoesPorMes(int mes, int ano) {

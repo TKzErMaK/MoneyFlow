@@ -9,15 +9,11 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.text.SimpleDateFormat;
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
 import androidx.activity.EdgeToEdge;
-
 import com.gb.trabalho.DAO.MovimentacaoDAO;
 import com.gb.trabalho.DAO.NotificacaoDAO;
 import com.gb.trabalho.Domain.Movimentacao;
@@ -54,13 +50,13 @@ public class CadastroMovimentacaoActivity extends BaseActivity {
 
         Intent intent = getIntent();
         if (intent != null) {
-            String valor = intent.getStringExtra("valor");
+            double valor = intent.getDoubleExtra("valor",0);
             String descricao = intent.getStringExtra("descricao");
             String data = intent.getStringExtra("data");
             int tipo = intent.getIntExtra("tipo", 0);
             id = intent.getIntExtra("id", 0);
 
-            edtValor.setText(valor);
+            edtValor.setText(String.valueOf(valor));
             edtDescricao.setText(descricao);
             edtData.setText(data);
 

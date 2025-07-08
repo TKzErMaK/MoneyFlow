@@ -6,21 +6,17 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.Gravity;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import androidx.activity.EdgeToEdge;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.cardview.widget.CardView;
-
 import com.gb.trabalho.DAO.MetaDAO;
 import com.gb.trabalho.Domain.Meta;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;

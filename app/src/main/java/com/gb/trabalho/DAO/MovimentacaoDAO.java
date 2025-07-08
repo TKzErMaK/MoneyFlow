@@ -4,17 +4,13 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.icu.util.Calendar;
-
 import com.gb.trabalho.Helper.DatabaseHelper;
 import com.gb.trabalho.Domain.Movimentacao;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import java.util.Objects;
 
 public class MovimentacaoDAO {
     private SQLiteDatabase db;
@@ -65,13 +61,13 @@ public class MovimentacaoDAO {
         return receita - despesa;
     }
 
-    public double buscarReceitaPeriodo(String dataInicial) {
+    public double buscarReceitaPeriodo(String dataFinal) {
         double receita = 0.0;
         String dataAtual = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(new Date());
 
         Cursor cursor = db.rawQuery(
                 "SELECT SUM(valor) FROM movimentacao WHERE tipo = 1 AND data BETWEEN ? AND ?",
-                new String[]{dataInicial, dataAtual}
+                new String[]{dataAtual, dataFinal}
         );
 
         if (cursor.moveToFirst()) {
@@ -93,7 +89,6 @@ public class MovimentacaoDAO {
 
             if (dataIni == null || dataFim == null) return 0.0;
 
-            // Garante que data final não passe de hoje
             if (dataFim.after(hoje)) {
                 dataFim = hoje;
             }
@@ -118,13 +113,13 @@ public class MovimentacaoDAO {
         return receita;
     }
 
-    public double buscarDespesaPeriodo(String dataInicial) {
+    public double buscarDespesaPeriodo(String dataFinal) {
         double despesa = 0.0;
         String dataAtual = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(new Date());
 
         Cursor cursor = db.rawQuery(
                 "SELECT SUM(valor) FROM movimentacao WHERE tipo = 0 AND data BETWEEN ? AND ?",
-                new String[]{dataInicial, dataAtual}
+                new String[]{dataAtual,dataFinal}
         );
 
         if (cursor.moveToFirst()) {

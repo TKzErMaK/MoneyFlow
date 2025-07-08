@@ -1,21 +1,13 @@
 package com.gb.trabalho.DAO;
 
-import static androidx.core.database.CursorKt.getStringOrNull;
-import static com.gb.trabalho.Helper.DatabaseHelper.getInt;
-import static com.gb.trabalho.Helper.DatabaseHelper.getString;
 
+import static com.gb.trabalho.Helper.DatabaseHelper.getInt;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.icu.util.Calendar;
-import android.text.TextUtils;
-import android.widget.Toast;
-
 import com.gb.trabalho.Helper.DatabaseHelper;
 import com.gb.trabalho.Domain.Notificacao;
-
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;

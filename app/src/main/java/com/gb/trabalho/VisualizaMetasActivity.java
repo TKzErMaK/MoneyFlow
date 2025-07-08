@@ -7,16 +7,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
 import androidx.activity.EdgeToEdge;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
-
 import com.gb.trabalho.DAO.MetaDAO;
 import com.gb.trabalho.DAO.MovimentacaoDAO;
 import com.gb.trabalho.Domain.Meta;
 import com.google.android.material.progressindicator.CircularProgressIndicator;
-
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

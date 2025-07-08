@@ -7,15 +7,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.activity.EdgeToEdge;
-
 import com.gb.trabalho.DAO.InvestimentoDAO;
-import com.gb.trabalho.DAO.NotificacaoDAO;
 import com.gb.trabalho.Domain.Investimento;
-import com.gb.trabalho.Domain.Notificacao;
 import com.gb.trabalho.Helper.FormatacaoDataHelper;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;

@@ -8,12 +8,9 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
 import android.widget.TextView;
-
 import androidx.activity.EdgeToEdge;
-
 import com.gb.trabalho.DAO.NotificacaoDAO;
 import com.gb.trabalho.Domain.Notificacao;
-
 import java.util.Date;
 
 public class CadastroNotificacoesActivity extends BaseActivity {

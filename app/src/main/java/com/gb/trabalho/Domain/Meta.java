@@ -41,11 +41,9 @@ public class Meta {
     public void setValor(double valor) {
         this.valor = valor;
     }
-
     public String getDataInicio() {
         return dataInicio;
     }
-
     public void setDataInicio(String dataInicio) {
         this.dataInicio = dataInicio;
     }

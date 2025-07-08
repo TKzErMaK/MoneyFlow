@@ -35,7 +35,7 @@ public class IndicadoresAPI {
 
                 JSONArray jsonArray = new JSONArray(resposta.toString());
                 int total = jsonArray.length();
-                int inicio = Math.max(0, total - 12); // pega os últimos 12 ou menos se não houver
+                int inicio = Math.max(0, total - 12);
 
                 double soma = 0.0;
                 for (int i = inicio; i < total; i++) {
@@ -73,7 +73,7 @@ public class IndicadoresAPI {
 
                 JSONArray jsonArray = new JSONArray(resposta.toString());
                 int total = jsonArray.length();
-                int inicio = Math.max(0, total - 12); // Garante que não quebre se tiver menos de 12
+                int inicio = Math.max(0, total - 12);
 
                 double soma = 0.0;
                 for (int i = inicio; i < total; i++) {
@@ -109,8 +109,8 @@ public class IndicadoresAPI {
 
                 JSONArray jsonArray = new JSONArray(resposta.toString());
                 int total = jsonArray.length();
-                int fim = total - 1; // desconsidera o último elemento
-                int inicio = Math.max(0, fim - 12); // pega os 12 anteriores (ou menos, se não houver)
+                int fim = total - 1;
+                int inicio = Math.max(0, fim - 12);
 
                 double soma = 0.0;
                 for (int i = inicio; i < fim; i++) {

@@ -1,7 +1,6 @@
 package com.gb.trabalho;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -13,8 +12,6 @@ import com.gb.trabalho.API.IndicadoresAPI;
 public class IndicadoresActivity extends BaseActivity {
     EditText edtSELIC, edtIPCA, edtCDI;
     ProgressBar progressBar;
-
-    // Contador para acompanhar respostas da API
     int respostasRecebidas = 0;
 
     @Override
@@ -28,7 +25,6 @@ public class IndicadoresActivity extends BaseActivity {
         edtCDI = findViewById(R.id.txt_cdi);
         progressBar = findViewById(R.id.progress_bar);
 
-        // Inicialmente esconde os campos
         edtSELIC.setVisibility(View.INVISIBLE);
         edtIPCA.setVisibility(View.INVISIBLE);
         edtCDI.setVisibility(View.INVISIBLE);
@@ -84,7 +80,6 @@ public class IndicadoresActivity extends BaseActivity {
     private void verificarConclusao() {
         respostasRecebidas++;
         if (respostasRecebidas == 3) {
-            // Todas as respostas chegaram (com sucesso ou erro)
             progressBar.setVisibility(View.GONE);
             edtSELIC.setVisibility(View.VISIBLE);
             edtIPCA.setVisibility(View.VISIBLE);

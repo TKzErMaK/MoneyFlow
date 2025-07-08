@@ -4,20 +4,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-
 import androidx.activity.EdgeToEdge;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.gb.trabalho.Adapter.ItemListaAdapter;
 import com.gb.trabalho.DAO.InvestimentoDAO;
 import com.gb.trabalho.Domain.Investimento;
 import com.gb.trabalho.Domain.ItemLista;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;

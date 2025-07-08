@@ -50,9 +50,8 @@ public class ItemListaAdapter extends RecyclerView.Adapter<ItemListaAdapter.View
             txtDescricao.setText(item.getDescricao());
             txtData.setText(item.getData());
 
-            //Para listagem de notificação com tipo tempo
             try{
-                if (item.getPrazo() >= 0 && item.getTipo() == 0)
+                if (item.getPrazo() > 0)
                     txtValor.setText(String.valueOf(item.getPrazo()));
             } catch (Exception ignored) {};
 

@@ -11,6 +11,7 @@
         android:id="@+id/layout_progress_info"
         android:layout_width="383dp"
         android:layout_height="451dp"
+        android:layout_marginTop="4dp"
         android:gravity="center_horizontal"
         android:orientation="vertical"
         android:paddingVertical="8dp"
@@ -28,7 +29,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.145">
 
             <com.github.mikephil.charting.charts.PieChart
                 android:id="@+id/pieChart"
@@ -39,54 +41,69 @@
 
         </FrameLayout>
 
-        <TextView
-            android:id="@+id/txt_progress_title"
-            style="@style/DefaultLabel"
-            android:layout_width="117dp"
-            android:layout_height="35dp"
-            android:text="Investimentos"
-            android:textAlignment="center"
-            android:textSize="14sp"
+        <LinearLayout
+            android:id="@+id/layout_labels"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingHorizontal="16dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.86"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/frameLayout" />
+            app:layout_constraintTop_toBottomOf="@id/frameLayout">
 
-        <TextView
-            android:id="@+id/txt_investimentos"
-            style="@style/DefaultLabel"
-            android:layout_width="122dp"
-            android:layout_height="31dp"
-            android:textAlignment="center"
-            android:textSize="14sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.87"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_progress_title" />
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="87dp"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/txt_saldo"
-            style="@style/DefaultLabel"
-            android:layout_width="112dp"
-            android:layout_height="31dp"
-            android:layout_marginTop="4dp"
-            android:textAlignment="center"
-            android:textSize="14sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.166"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_goal_title" />
+                <TextView
+                    android:id="@+id/txt_progress_title"
+                    style="@style/DefaultLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Investimentos"
+                    android:textAlignment="center"
+                    android:textSize="18sp" />
 
-        <TextView
-            android:id="@+id/txt_goal_title"
-            style="@style/DefaultLabel"
-            android:layout_width="111dp"
-            android:layout_height="31dp"
-            android:text="Saldo"
-            android:textAlignment="center"
-            android:textSize="14sp"
-            tools:layout_editor_absoluteX="45dp"
-            tools:layout_editor_absoluteY="377dp" />
+                <TextView
+                    android:id="@+id/txt_investimentos"
+                    style="@style/DefaultLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="87dp"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txt_goal_title"
+                    style="@style/DefaultLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Saldo"
+                    android:textAlignment="center"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/txt_saldo"
+                    style="@style/DefaultLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textSize="18sp" />
+            </LinearLayout>
+        </LinearLayout>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

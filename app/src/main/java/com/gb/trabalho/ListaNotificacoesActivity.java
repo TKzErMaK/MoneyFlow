@@ -6,17 +6,14 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.EditText;
 import android.widget.TextView;
-
 import androidx.activity.EdgeToEdge;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.gb.trabalho.Adapter.ItemListaAdapter;
 import com.gb.trabalho.Domain.ItemLista;
 import com.gb.trabalho.DAO.NotificacaoDAO;
 import com.gb.trabalho.Domain.Notificacao;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
 import java.util.ArrayList;
 import java.util.List;
 
