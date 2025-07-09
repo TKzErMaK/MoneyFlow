@@ -58,7 +58,9 @@
                     android:id="@+id/txt_selic"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:enabled="false" />
+                    android:enabled="false"
+                    android:textStyle="bold"
+                    android:textSize="20dp"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -78,7 +80,9 @@
                     android:id="@+id/txt_ipca"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:enabled="false" />
+                    android:enabled="false"
+                    android:textStyle="bold"
+                    android:textSize="20dp"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -98,7 +102,9 @@
                     android:id="@+id/txt_cdi"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:enabled="false" />
+                    android:enabled="false"
+                    android:textStyle="bold"
+                    android:textSize="20dp"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 

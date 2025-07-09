@@ -131,6 +131,7 @@ public class MainActivity extends BaseActivity {
 
         PieChart pieChart = findViewById(R.id.pieChart);
         List<PieEntry> entries = investimentoAdapter.converterParaPieEntries(investimentos);
+        totalInvestimentos = 0;
         for (PieEntry entry : entries) {
             totalInvestimentos += entry.getValue();
         }
