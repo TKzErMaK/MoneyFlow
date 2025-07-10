@@ -51,7 +51,7 @@ public class ItemListaAdapter extends RecyclerView.Adapter<ItemListaAdapter.View
             txtData.setText(item.getData());
 
             try{
-                if (item.getPrazo() > 0)
+                if (item.getPrazo() > 0 && item.getTipo() == 0)
                     txtValor.setText(String.valueOf(item.getPrazo()));
             } catch (Exception ignored) {};
 
