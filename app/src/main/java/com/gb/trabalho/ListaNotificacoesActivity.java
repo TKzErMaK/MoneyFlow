@@ -7,7 +7,6 @@ import android.text.TextWatcher;
 import android.widget.EditText;
 import android.widget.TextView;
 import androidx.activity.EdgeToEdge;
-import androidx.core.app.NotificationCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.gb.trabalho.Adapter.ItemListaAdapter;
@@ -82,7 +81,6 @@ public class ListaNotificacoesActivity extends BaseActivity {
             int prazo = notificacao.getPrazo();
 
             itens.add(new ItemLista(valor, descricao, "", tipo, id, prazo,0));
-            //notificacaoPrazo();
         }
 
         ItemListaAdapter adapter = new ItemListaAdapter(this, itens, item -> {
@@ -98,13 +96,5 @@ public class ListaNotificacoesActivity extends BaseActivity {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
-    }
-
-    private void notificacaoPrazo(){
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
-                .setSmallIcon(R.drawable.moneyflow)
-                .setContentTitle("MoneyFlow")
-                .setContentText("Teste")
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
     }
 }
