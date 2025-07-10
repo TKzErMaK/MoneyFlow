@@ -43,4 +43,5 @@ dependencies {
     androidTestImplementation(libs.espresso.core)
     implementation(libs.drawerlayout)
     implementation("com.google.firebase:firebase-auth:21.0.1")
+    implementation("androidx.core:core-ktx:1.16.0")
 }
